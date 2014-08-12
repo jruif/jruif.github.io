@@ -16,7 +16,7 @@ body {
   font-size: 15px;
   text-shadow: 0 0 1px transparent;
 }
-@media screen and (max-width: 1260px) {
+@media screen and (max-width: 1000px) {
   body {
     margin: 0 30px;
   }
@@ -68,7 +68,7 @@ a {
   width: 900px;
   margin: 0 auto;
 }
-@media screen and (max-width: 1260px) {
+@media screen and (max-width: 1000px) {
   .inner {
     width: 100%;
   }
@@ -76,7 +76,7 @@ a {
 #main-col {
   width: 900px;
 }
-@media screen and (max-width: 1260px) {
+@media screen and (max-width: 1000px) {
   #main-col {
     width: 100%;
     margin-right: -300px;
@@ -95,7 +95,6 @@ a {
 }
 #header a {
   color: #999;
-  font-size: 1.2em;
 }
 #header a:hover {
   color: #258fb8;
@@ -129,16 +128,17 @@ a {
 }
 #header #main-nav {
   font-family: "Microsoft YaHei", "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
-  line-height: 2.5em;
+  font-size: 2.5em;
+  line-height: 1.2em;
   margin-right: 30px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 #header #main-nav ul {
   list-style: none;
 }
 #header #main-nav ul li {
   float: left;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 #header #main-nav a {
   padding: 10px;
