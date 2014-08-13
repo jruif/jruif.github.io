@@ -1,0 +1,238 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>通过终端调试 AngularJS 应用 | Jruif&#39;s Blog | 求是，坚持乎；求知，反复而</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="通过终端调试 AngularJS 应用"/>
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><a href="/" class="alignleft">
+	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 求是，坚持乎；求知，反复而">
+</a>
+<div class="header-myinfo">
+	<h1 class="header-title">Jruif&#39;s Blog</h1>
+	 
+	<span class="header-subtitle">求是，坚持乎；求知，反复而</span>
+</div>
+<nav id="main-nav" class="alignright clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-13T07:25:52.000Z"><a href="/2014/08/13/通过终端调试-AngularJS-应用/">2014 8月 13</a></time>
+      
+      
+  
+    <h1 class="title">通过终端调试 AngularJS 应用</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <pre><code>本文来自网络，如有侵权请联系管理员
+</code></pre><p>当我们构建AngularJS应用时，通过浏览器（如Chrome，Firefox和IE）的JavaScript控制台访问应用中隐藏的数据和服务总会有些困难。下面是一些简单的技巧可以帮助我们通过Javascript控制台来查看或者控制正在运行的Angular应用，使得应用可以比较容易进行测试，修改，甚至实时的修改我们的Angular应用：</p>
+<p><a id="more"></a></p>
+<h3 id="1、访问作用域">1、访问作用域</h3>
+<p>通过一行简单的JS程序访问页面中任何作用域（甚至是隔离的作用域！）：</p>
+<figure class="highlight Javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; angular.element(targetNode).scope()  </div><div class="line">-&gt; ChildScope {$id: <span class="string">"005"</span>, <span class="keyword">this</span>: ChildScope, $$listeners: <span class="built_in">Object</span>, $$listenerCount: <span class="built_in">Object</span>, $parent: Scope…}</div></pre></td></tr></table></figure>
+
+<p>对于隔离作用域：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; angular.element(targetNode).isolateScope()  </div><div class="line">-&gt; Scope {$id: <span class="string">"009"</span>, $$childTail: ChildScope, $$childHead: ChildScope, $$prevSibling: ChildScope, $$nextSibling: Scope…}</div></pre></td></tr></table></figure>
+
+<p>这里用<code>targetNode</code>作为HTML节点的引用。你可以非常轻松的通过<code>document.querySelector()</code>来创建一个<code>targetNode</code></p>
+<h3 id="2、查看作用域树">2、查看作用域树</h3>
+<p>有些时候，我们需要查看页面中作用域层次来有效的调试我们的应用。<a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?hl=en" target="_blank" rel="external">AngularJS Batarang</a>正是我们需要的一款Chrome浏览器的扩展，可以展示当前作用域层次，并具有其他非常有用的特性。<br><img src="" alt=""></p>
+<h3 id="3、抓取任何服务">3、抓取任何服务</h3>
+<p>无论ngApp在哪里定义，我们都可以使用注入器功能来抓取任何的服务的引用（如果使用angular的bootstrap方法，则可以手动抓取$rootElement）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; angular.element(<span class="string">'html'</span>).injector().get(<span class="string">'MyService'</span>)  </div><div class="line">-&gt; <span class="built_in">Object</span> {undo: <span class="function"><span class="keyword">function</span>, <span class="title">redo</span>: <span class="title">function</span>, <span class="title">_pushAction</span>: <span class="title">function</span>, <span class="title">newDocument</span>: <span class="title">function</span>, <span class="title">init</span>: <span class="title">function</span>…}</span></div></pre></td></tr></table></figure>
+
+<p>然后我们就可以对该服务进行调用，就像我们可以将服务注入一样。</p>
+<h3 id="4、访问控制器使用指令">4、访问控制器使用指令</h3>
+<p>一些指令定义了一个拥有某些额外（通常是分享）功能的控制器。为了从控制台访问一个给定指令的控制器实例，只需使用 controller() 方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; angular.element(<span class="string">'my-pages'</span>).controller()  </div><div class="line">-&gt; Constructor {}</div></pre></td></tr></table></figure>
+
+<p>最后一种做法更高级并且不常用。</p>
+<h3 id="5、Chrome_控制台特性">5、Chrome 控制台特性</h3>
+<p>Chrome浏览器的控制台有一堆不错的捷径 来调试浏览器应用。这是一些Angular开发中最好的做法：</p>
+<p>$0-$4: 访问最近在查看窗口中进行选取的 5 个DOM元素。选择抓取的范围非常方便。</p>
+<p>$(selector)和$$(selector): 分别是querySelector() 和 querySelectorAll的一个快速的替代</p>
+<p>感谢 <a href="http://twitter.com/zgohr" target="_blank" rel="external">@zgohr</a> 提供这种方法!</p>
+<h2 id="结论">结论</h2>
+<p>通过几个简单的技巧，我们可以访问页面任何作用域中的数据，查看作用域层次结构，注入服务和控制指令。</p>
+<p>所以下一次，如果你想稍微进行调整，检查自己的工作或者通过控制台控制AngularJS一个用，我希望你能记住这些命令，并且能做到像我一样觉得他们非常实用！</p>
+<p>英文原文：<a href="http://ionicframework.com/blog/angularjs-console/" target="_blank" rel="external">Debugging AngularJS Apps from the Console</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/控制台/">控制台</a>, <a href="/tags/angularjs/">angularjs</a>, <a href="/tags/抓包/">抓包</a>, <a href="/tags/javascript/">javascript</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Jruif"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->    
+</section>
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/2014/08/13/教你学编程：如何编写Nodejs插件/" class="next" title="教你学编程：如何编写Node.js插件"><span id="next">下一页</span></a>
+  
+  <div class="clearfix"></div>
+</nav>
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2014 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-53493334-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+<link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadetime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			(function(){
+	  				var img={};
+	  				img.fade=fadetime;
+	  				img.src="http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15);
+	  				bg.push(img);
+	  			})();	
+			}
+			return bg;
+	  	})(6,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 12000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+
+(function(){
+	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+})();
+</script>
+
+
+</body>
+</html>
+
