@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>一个亮点 | Jruif&#39;s Blog | 求是，坚持乎；求知，反复而</title>
+  <title>一个亮点 | Jruif&#39;s Blog | 下个月学习重点：nodejs &amp; polymer</title>
   <meta name="author" content="jruif">
   
   <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
@@ -27,12 +27,12 @@
 
 <body>
   <header id="header" class="inner clearfix"><a href="/" class="alignleft">
-	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 求是，坚持乎；求知，反复而">
+	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 下个月学习重点：nodejs &amp; polymer">
 </a>
 <div class="header-myinfo">
 	<h1 class="header-title">Jruif&#39;s Blog</h1>
 	 
-	<span class="header-subtitle">求是，坚持乎；求知，反复而</span>
+	<span class="header-subtitle">下个月学习重点：nodejs &amp; polymer</span>
 </div>
 <nav id="main-nav" class="alignright clearfix">
   <ul class="clearfix">
@@ -77,7 +77,7 @@
     <div class="entry">
       
         <pre><code>本文原创，尽情翻阅
-</code></pre><p>今天项目中遇到一串数字，需要来格式化显示，示例如下<br>    123456231显示为123,456,231<br><a id="more"></a><br>这种场景太常见了，我的做法是：</p>
+</code></pre><p>今天项目中遇到一串数字，需要来格式化显示，示例如下<br>123456231显示为123,456,231<br><a id="more"></a><br>这种场景太常见了，我的做法是：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">format</span><span class="params">(num)</span> </span>{</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> num !== <span class="string">"string"</span>)</div><div class="line">        num = (num).toString();</div><div class="line">    <span class="keyword">var</span> arr = num.split(<span class="string">""</span>);</div><div class="line">    <span class="keyword">var</span> arr1 = arr.reverse();</div><div class="line">    <span class="keyword">var</span> key = <span class="number">3</span>,len=arr.length;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = len&gt;<span class="number">5</span>?~~(len / <span class="number">3</span>) - <span class="number">1</span>:~~(len / <span class="number">3</span>); i &gt; <span class="number">0</span>; i--) {</div><div class="line">        arr1.splice(key, <span class="number">0</span>, <span class="string">","</span>);</div><div class="line">        key += <span class="number">4</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> arr1.reverse().join(<span class="string">""</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>但是还觉得不错，没bug，没遗漏，可是大神出现了，用他的金刚钻秒杀了我</p>
@@ -120,6 +120,8 @@
 
 
 <nav id="pagination">
+  
+    <a href="/2014/08/28/一个亮点/" class="prev" title="一个亮点"><span id="prev">上一页</span></a>
   
   
     <a href="/2014/08/13/通过终端调试-AngularJS-应用/" class="next" title="通过终端调试 AngularJS 应用"><span id="next">下一页</span></a>
