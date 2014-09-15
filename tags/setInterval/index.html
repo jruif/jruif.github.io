@@ -1,0 +1,149 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>setInterval | Jruif&#39;s Blog | 九月学习重点：nodejs &amp; polymer</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><a href="/" class="alignleft">
+	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 九月学习重点：nodejs &amp; polymer">
+</a>
+<div class="header-myinfo">
+	<h1 class="header-title">Jruif&#39;s Blog</h1>
+	 
+	<span class="header-subtitle">九月学习重点：nodejs &amp; polymer</span>
+</div>
+<nav id="main-nav" class="alignright clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+<h2 class="archive-title tag">setInterval</h2>
+
+
+  <div class="archive">
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2014-09-15T03:14:41.000Z"><a href="/2014/09/15/Javascript秘密花园[摘录]/">2014 9月 15</a></time>
+            
+              <h1 class="title"><a href="/2014/09/15/Javascript秘密花园[摘录]/">Javascript秘密花园[摘录]</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
+  </div>
+
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2014 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-53493334-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+<link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadetime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			(function(){
+	  				var img={};
+	  				img.fade=fadetime;
+	  				img.src="http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15);
+	  				bg.push(img);
+	  			})();	
+			}
+			return bg;
+	  	})(6,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 12000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+
+(function(){
+	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+})();
+</script>
+
+
+</body>
+</html>
+
