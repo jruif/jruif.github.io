@@ -68,7 +68,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-09-15T03:14:41.000Z"><a href="/2014-09/15-sc3adww036xxo2hk/">2014 9月 15</a></time>
+        <time datetime="2014-09-15T03:14:41.000Z"><a href="/2014-09/15-56b8md895feraj8q/">2014 9月 15</a></time>
       
       
   
@@ -86,23 +86,23 @@
 <li><a href="#数组">数组</a><ul>
 <li><a href="#遍历">遍历</a></li>
 <li><a href="#length属性">length属性</a></li>
-<li><a href="#array-构造函数">Array 构造函数</a></li>
+<li><a href="#array构造函数">Array构造函数</a></li>
 </ul>
 </li>
 <li><a href="#类型">类型</a><ul>
-<li><a href="#typeof-操作符">typeof 操作符</a></li>
-<li><a href="#instanceof-操作符">instanceof 操作符</a></li>
+<li><a href="#typeof操作符">typeof操作符</a></li>
+<li><a href="#instanceof操作符">instanceof操作符</a></li>
 </ul>
 </li>
-<li><a href="#undefined-和-null">undefined 和 null</a><ul>
-<li><a href="#ndefined-的值">ndefined 的值</a></li>
-<li><a href="#处理-undefined-值的改变">处理 undefined 值的改变</a></li>
-<li><a href="#null-的用处">null 的用处</a></li>
+<li><a href="#undefined和null">undefined和null</a><ul>
+<li><a href="#undefined的值">undefined的值</a></li>
+<li><a href="#处理undefined值的改变">处理undefined值的改变</a></li>
+<li><a href="#null的用处">null的用处</a></li>
 </ul>
 </li>
 <li><a href="#其他">其他</a><ul>
-<li><a href="#settimeout-和-setinterval">setTimeout 和 setInterval</a></li>
-<li><a href="#setinterval-的堆调用">setInterval 的堆调用</a></li>
+<li><a href="#settimeout和setinterval">setTimeout和setInterval</a></li>
+<li><a href="#setinterval的堆调用">setInterval的堆调用</a></li>
 </ul>
 </li>
 </ul>
@@ -125,7 +125,7 @@
 <p>为 length 设置一个更小的值会截断数组，但是增大 length 属性值不会对数组产生影响。</p>
 <h4 id="结论">结论</h4>
 <p>为了更好的性能，推荐使用普通的 for 循环并缓存数组的 length 属性。<br>使用 for in 遍历数组被认为是不好的代码习惯并倾向于产生错误和导致性能问题。</p>
-<h3 id="Array_构造函数">Array 构造函数</h3>
+<h3 id="Array构造函数">Array构造函数</h3>
 <p>由于 Array 的构造函数在如何处理参数时有点模棱两可，因此总是推荐使用数组的字面语法 - [] - 来创建数组。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]; <span class="comment">// 结果: [1, 2, 3]</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// 结果: [1, 2, 3]</span></div><div class="line">[<span class="number">3</span>]; <span class="comment">// 结果: [3]</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>); <span class="comment">// 结果: [] </span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'3'</span>) <span class="comment">// 结果: ['3']</span></div><div class="line"><span class="comment">// 译者注：因此下面的代码将会使人很迷惑</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>); <span class="comment">// 结果: [3, 4, 5] </span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>) <span class="comment">// 结果: []，此数组长度为 3</span></div></pre></td></tr></table></figure>
 
@@ -140,7 +140,7 @@
 <h4 id="结论-1">结论</h4>
 <p>应该尽量避免使用数组构造函数创建新数组。推荐使用数组的字面语法。它们更加短小和简洁，因此增加了代码的可读性。</p>
 <h2 id="类型">类型</h2>
-<h3 id="typeof_操作符">typeof 操作符</h3>
+<h3 id="typeof操作符">typeof操作符</h3>
 <p>typeof 操作符（和 instanceof 一起）或许是 JavaScript 中最大的设计缺陷， 因为几乎不可能从它们那里得到想要的结果。</p>
 <p>尽管 instanceof 还有一些极少数的应用场景，typeof 只有一个实际的应用（译者注：这个实际应用是用来检测一个对象是否已经定义或者是否已经赋值）， 而这个应用却不是用来检查对象的类型。</p>
 <p>注意: 由于 typeof 也可以像函数的语法被调用，比如 typeof(obj)，但这并是一个函数调用。 那两个小括号只是用来计算一个表达式的值，这个返回值会作为 typeof 操作符的一个操作数。 实际上不存在名为 typeof 的函数。<br>JavaScript 类型表格</p>
@@ -149,19 +149,19 @@
 <p>上面表格中，Type 一列表示 typeof 操作符的运算结果。可以看到，这个值在大多数情况下都返回 “object”。</p>
 <p>Class 一列表示对象的内部属性 [[Class]] 的值。</p>
 <p>JavaScript 标准文档中定义: [[Class]] 的值只可能是下面字符串中的一个： Arguments, Array, Boolean, Date, Error, Function, JSON, Math, Number, Object, RegExp, String.<br>为了获取对象的 [[Class]]，我们需要使用定义在 Object.prototype 上的方法 toString。</p>
-<h3 id="instanceof_操作符">instanceof 操作符</h3>
+<h3 id="instanceof操作符">instanceof操作符</h3>
 <p>instanceof 操作符用来比较两个操作数的构造函数。只有在比较自定义的对象时才有意义。 如果用来比较内置类型，将会和 typeof 操作符 一样用处不大。</p>
 <h4 id="比较自定义对象">比较自定义对象</h4>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span><span class="params">()</span> </span>{}</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span><span class="params">()</span> </span>{}</div><div class="line">Bar.prototype = <span class="keyword">new</span> Foo();</div><div class="line"><span class="keyword">new</span> Bar() <span class="keyword">instanceof</span> Bar; <span class="comment">// true</span></div><div class="line"><span class="keyword">new</span> Bar() <span class="keyword">instanceof</span> Foo; <span class="comment">// true</span></div><div class="line"><span class="comment">// 如果仅仅设置 Bar.prototype 为函数 Foo 本身，而不是 Foo 构造函数的一个实例</span></div><div class="line">Bar.prototype = Foo;</div><div class="line"><span class="keyword">new</span> Bar() <span class="keyword">instanceof</span> Foo; <span class="comment">// false</span></div></pre></td></tr></table></figure>
 
-<h4 id="instanceof_比较内置类型">instanceof 比较内置类型</h4>
+<h4 id="instanceof比较内置类型">instanceof比较内置类型</h4>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'foo'</span>) <span class="keyword">instanceof</span> <span class="built_in">String</span>; <span class="comment">// true</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">'foo'</span>) <span class="keyword">instanceof</span> <span class="built_in">Object</span>; <span class="comment">// true</span></div><div class="line"><span class="string">'foo'</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>; <span class="comment">// false</span></div><div class="line"><span class="string">'foo'</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>; <span class="comment">// false</span></div></pre></td></tr></table></figure>
 
 <p>有一点需要注意，instanceof 用来比较属于不同 JavaScript 上下文的对象（比如，浏览器中不同的文档结构）时将会出错， 因为它们的构造函数不会是同一个对象。</p>
 <h4 id="结论-2">结论</h4>
 <p>instanceof 操作符应该仅仅用来比较来自同一个 JavaScript 上下文的自定义对象。 正如 typeof 操作符一样，任何其它的用法都应该是避免的</p>
-<h2 id="undefined_和_null">undefined 和 null</h2>
-<h3 id="undefined_的值">undefined 的值</h3>
+<h2 id="undefined和null">undefined和null</h2>
+<h3 id="undefined的值">undefined的值</h3>
 <p>undefined 是一个值为 undefined 的类型。</p>
 <p>这个语言也定义了一个全局变量，它的值是 undefined，这个变量也被称为 undefined。 但是这个变量不是一个常量，也不是一个关键字。这意味着它的值可以轻易被覆盖。</p>
 <p>ES5 提示: 在 ECMAScript 5 的严格模式下，undefined 不再是 可写的了。 但是它的名称仍然可以被隐藏，比如定义一个函数名为 undefined。</p>
@@ -174,7 +174,7 @@
 <li>函数参数没有被显式的传递值。</li>
 <li>任何被设置为 undefined 值的变量。</li>
 </ul>
-<h3 id="处理_undefined_值的改变">处理 undefined 值的改变</h3>
+<h3 id="处理undefined值的改变">处理undefined值的改变</h3>
 <p>由于全局变量 undefined 只是保存了 undefined 类型实际值的副本， 因此对它赋新值不会改变类型 undefined 的值。</p>
 <p>然而，为了方便其它变量和 undefined 做比较，我们需要事先获取类型 undefined 的值。</p>
 <p>为了避免可能对 undefined 值的改变，一个常用的技巧是使用一个传递到匿名包装器的额外参数。 在调用时，这个参数不会获取任何值。</p>
@@ -185,11 +185,11 @@
 
 <p>这里唯一的区别是，在压缩后并且函数内没有其它需要使用 var 声明变量的情况下，这个版本的代码会多出 4 个字节的代码。</p>
 <p>译者注：这里有点绕口，其实很简单。如果此函数内没有其它需要声明的变量，那么 var 总共 4 个字符（包含一个空白字符） 就是专门为 undefined 变量准备的，相比上个例子多出了 4 个字节。</p>
-<h3 id="null_的用处">null 的用处</h3>
+<h3 id="null的用处">null的用处</h3>
 <p>JavaScript 中的 undefined 的使用场景类似于其它语言中的 null，实际上 JavaScript 中的 null 是另外一种数据类型。</p>
 <p>它在 JavaScript 内部有一些使用场景（比如声明原型链的终结 Foo.prototype = null），但是大多数情况下都可以使用 undefined 来代替</p>
 <h2 id="其他">其他</h2>
-<h3 id="setTimeout_和_setInterval">setTimeout 和 setInterval</h3>
+<h3 id="setTimeout和setInterval">setTimeout和setInterval</h3>
 <p>由于 JavaScript 是异步的，可以使用 setTimeout 和 setInterval 来计划执行函数。</p>
 <p>注意: 定时处理不是 ECMAScript 的标准，它们在 DOM (文档对象模型) 被实现。<br>function foo() {}<br>var id = setTimeout(foo, 1000); // 返回一个大于零的数字<br>当 setTimeout 被调用时，它会返回一个 ID 标识并且计划在将来大约 1000 毫秒后调用 foo 函数。 foo 函数只会被执行一次。</p>
 <p>基于 JavaScript 引擎的计时策略，以及本质上的单线程运行方式，所以其它代码的运行可能会阻塞此线程。 因此没法确保函数会在 setTimeout 指定的时刻被调用。</p>
@@ -197,7 +197,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">this</span>.value = <span class="number">42</span>;</div><div class="line">    <span class="keyword">this</span>.method = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">        <span class="comment">// this 指向全局对象</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.value); <span class="comment">// 输出：undefined</span></div><div class="line">    };</div><div class="line">    setTimeout(<span class="keyword">this</span>.method, <span class="number">500</span>);</div><div class="line">}</div><div class="line"><span class="keyword">new</span> Foo();</div></pre></td></tr></table></figure>
 
 <p>注意: setTimeout 的第一个参数是函数对象，一个常犯的错误是这样的 setTimeout(foo(), 1000)， 这里回调函数是 foo 的返回值，而不是foo本身。 大部分情况下，这是一个潜在的错误，因为如果函数返回 undefined，setTimeout 也不会报错。</p>
-<h3 id="setInterval_的堆调用">setInterval 的堆调用</h3>
+<h3 id="setInterval的堆调用">setInterval的堆调用</h3>
 <p>setTimeout 只会执行回调函数一次，不过 setInterval - 正如名字建议的 - 会每隔 X 毫秒执行函数一次。 但是却不鼓励使用这个函数。</p>
 <p>当回调函数的执行被阻塞时，setInterval 仍然会发布更多的回调指令。在很小的定时间隔情况下，这会导致回调函数被堆积起来。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span>{</div><div class="line">    <span class="comment">// 阻塞执行 1 秒</span></div><div class="line">}</div><div class="line">setInterval(foo, <span class="number">1000</span>);</div></pre></td></tr></table></figure>
@@ -259,7 +259,7 @@
 <nav id="pagination">
   
   
-    <a href="/2014-08/28-9gaq3bu19jkwuur8/" class="next" title="一个亮点"><span id="next">下一页</span></a>
+    <a href="/2014-08/28-h6zytihqp987n7kp/" class="next" title="一个亮点"><span id="next">下一页</span></a>
   
   <div class="clearfix"></div>
 </nav>
