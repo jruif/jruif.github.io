@@ -88,7 +88,7 @@ a {
   }
 }
 #header {
-  margin: 50px auto;
+  margin: 0px auto 30px;
   background: #fff;
   padding: 20px 0;
 }
@@ -141,6 +141,12 @@ a {
 }
 #header #main-nav a {
   padding: 10px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+  text-shadow: 0 0 30px #999;
 }
 article {
   background: #fff;
@@ -154,11 +160,12 @@ article {
   transition: 0.5s;
 }
 article:hover {
-  opacity: 0.95;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
-  filter: alpha(opacity=95);
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
 }
 article.page {
+  margin-bottom: 1000px;
   padding-left: 20px;
 }
 article.page .icon {
@@ -182,7 +189,7 @@ article.link .title a:after {
 }
 article .post-content {
   padding: 20px 20px 15px 77px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   position: relative;
 }
 @media screen and (max-width: 600px) {
@@ -565,7 +572,7 @@ article footer .addthis iframe {
 .archive-title {
   color: #fff;
   font-weight: normal;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   text-shadow: 0 0 1px #fff;
   text-align: center;
 }
