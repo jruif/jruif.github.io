@@ -1,0 +1,220 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>阅读underscore源码笔记 | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="阅读underscore源码笔记"/>
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><a href="/" class="alignleft">
+	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
+</a>
+<div class="header-myinfo">
+	<h1 class="header-title">Jruif&#39;s Blog</h1>
+	 
+	<span class="header-subtitle">路漫漫其修远兮，吾将上下而求索</span>
+</div>
+<nav id="main-nav" class="alignright clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+      <li><a href="/resume">About</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-22T10:29:08.000Z"><a href="/2014-09/阅读underscore源码笔记/">2014 9月 22</a></time>
+      
+      
+  
+    <h1 class="title">阅读underscore源码笔记</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <pre><code>本文为原创作品，可以转载，但请添加本文连接，谢谢传阅
+</code></pre><p>underscorejs，一个实用的的Javascript函数库，值得推荐，<a href="http://underscorejs.org" target="_blank" rel="external">官网地址</a>，<a href="https://github.com/jashkenas/underscore" target="_blank" rel="external">Github仓库</a>，<a href="http://underscorejs.org/docs/underscore.html" target="_blank" rel="external">有注释的源码</a><br><a id="more"></a></p>
+<ul>
+<li><code>obj.length === +obj.length</code> 判断obj.length是不是一个数字，“+”会吧非number类型的值尝试转换为number类型，如果失败返回NAN。</li>
+<li><code>void 0</code> 这个相信大家经常见，但是你明白它是做什么的吗？而且我们遇到的情况大多都是在超链接里写着<code>Javascript:(void 0)</code>，现在我又遇到了<code>a === void 0</code>,好吧，不买官子了，其实这个是用来防止<code>undefined</code>被重置（关于这一点可以点击<a href="http://jruif.github.io/2014-09/Javascript%E7%A7%98%E5%AF%86%E8%8A%B1%E5%9B%AD[%E6%91%98%E5%BD%95]/#undefined的值" target="_blank" rel="external">这里</a>查看），而<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void" target="_blank" rel="external">void</a>是一个修饰参数的前缀关键字，并且永远返回<code>undefined</code>，因此在超链接里使用void 0就清晰了，返回<code>undefined</code>就阻止了<code>a</code>标签的默认事件。例如：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> <span class="number">0</span></div><div class="line"><span class="keyword">void</span> (<span class="number">0</span>)</div><div class="line"><span class="keyword">void</span> <span class="string">"hello"</span></div><div class="line"><span class="keyword">void</span> (<span class="keyword">new</span> <span class="built_in">Date</span>())</div><div class="line"><span class="comment">//都将返回undefined</span></div></pre></td></tr></table></figure>
+
+<p>  为什么使用0，我只想说呵呵，谁让<code>0</code>最短小可爱呢。</p>
+<ul>
+<li>ECMAScript5中的bind，underscore的实现方法</li>
+</ul>
+<figure class="highlight Javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> nativeBind = FuncProto.bind;</div><div class="line"><span class="keyword">var</span> Ctor = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{};</div><div class="line">_.bind = <span class="function"><span class="keyword">function</span><span class="params">(func, context)</span> </span>{</div><div class="line">  <span class="keyword">var</span> args, bound;</div><div class="line">  <span class="keyword">if</span> (nativeBind && func.bind === nativeBind) <span class="keyword">return</span> nativeBind.apply(func, <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>));</div><div class="line">  <span class="keyword">if</span> (!_.isFunction(func)) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Bind must be called on a function'</span>);</div><div class="line">  args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">2</span>);</div><div class="line">  bound = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> bound)) <span class="keyword">return</span> func.apply(context, args.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</div><div class="line">    Ctor.prototype = func.prototype;</div><div class="line">    <span class="keyword">var</span> self = <span class="keyword">new</span> Ctor;</div><div class="line">    Ctor.prototype = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">var</span> result = func.apply(self, args.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</div><div class="line">    <span class="keyword">if</span> (_.isObject(result)) <span class="keyword">return</span> result;</div><div class="line">    <span class="keyword">return</span> self;</div><div class="line">  };</div><div class="line">  <span class="keyword">return</span> bound;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>  bind很多人不明白为什么在有了call和apply还是要出个bind，看完这段代码大家应该明白了吧，其实就是内存驻留版的apply(更多详情前点击<a href="http://jruif.github.io/gh-pages/#324" target="_blank" rel="external">这里</a>)。</p>
+<p>好了今天就看到这儿了，其实这个库结构很简单，但是却实现了很多使用的功能函数，下面在copy一段比较实用函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">_.isEmpty = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> </span>{</div><div class="line">  <span class="keyword">if</span> (obj == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  <span class="keyword">if</span> (_.isArray(obj) || _.isString(obj) || _.isArguments(obj)) <span class="keyword">return</span> obj.length === <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) <span class="keyword">if</span> (_.has(obj, key)) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">};</div><div class="line">_.isElement = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> </span>{</div><div class="line">  <span class="keyword">return</span> !!(obj && obj.nodeType === <span class="number">1</span>);</div><div class="line">};</div><div class="line">_.isArray = nativeIsArray || <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> </span>{</div><div class="line">  <span class="keyword">return</span> toString.call(obj) === <span class="string">'[object Array]'</span>;</div><div class="line">};</div><div class="line">_.isObject = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> </span>{</div><div class="line">  <span class="keyword">var</span> type = <span class="keyword">typeof</span> obj;</div><div class="line">  <span class="keyword">return</span> type === <span class="string">'function'</span> || type === <span class="string">'object'</span> && !!obj;</div><div class="line">};</div><div class="line">_.isNaN = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> </span>{</div><div class="line">  <span class="keyword">return</span> _.isNumber(obj) && obj !== +obj;</div><div class="line">};</div><div class="line">_.isBoolean = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> </span>{</div><div class="line">  <span class="keyword">return</span> obj === <span class="literal">true</span> || obj === <span class="literal">false</span> || toString.call(obj) === <span class="string">'[object Boolean]'</span>;</div><div class="line">};</div><div class="line">_.has = <span class="function"><span class="keyword">function</span><span class="params">(obj, key)</span> </span>{</div><div class="line">  <span class="keyword">return</span> obj != <span class="literal">null</span> && hasOwnProperty.call(obj, key);</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<blockquote>
+<p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/underscorejs/">underscorejs</a>, <a href="/tags/bind/">bind</a>, <a href="/tags/伪协议/">伪协议</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Jruif"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->    
+</section>
+
+
+
+<nav id="pagination">
+  
+    <a href="/2014-10/《黑客与画家》读书笔记/" class="prev" title="《黑客与画家》读书笔记"><span id="prev">上一页</span></a>
+  
+  
+    <a href="/2014-09/如果你打算开始创业，我想告诉你的是…/" class="next" title="如果你打算开始创业，我想告诉你的是…"><span id="next">下一页</span></a>
+  
+  <div class="clearfix"></div>
+</nav>
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2014 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadeTime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
+			}
+			return bg;
+	  	})(5,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 60000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+</script>
+
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
+
+</body>
+</html>
+

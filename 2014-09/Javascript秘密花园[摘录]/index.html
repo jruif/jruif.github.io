@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Javascript秘密花园[摘录] | Jruif&#39;s Blog | 九月学习重点：nodejs &amp; polymer</title>
+  <title>Javascript秘密花园[摘录] | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
   <meta name="author" content="jruif">
   
   <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
@@ -22,17 +22,18 @@
   <link href="/favicon.png" rel="icon">
   <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
 </head>
 
 
 <body>
   <header id="header" class="inner clearfix"><a href="/" class="alignleft">
-	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 九月学习重点：nodejs &amp; polymer">
+	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
 </a>
 <div class="header-myinfo">
 	<h1 class="header-title">Jruif&#39;s Blog</h1>
 	 
-	<span class="header-subtitle">九月学习重点：nodejs &amp; polymer</span>
+	<span class="header-subtitle">路漫漫其修远兮，吾将上下而求索</span>
 </div>
 <nav id="main-nav" class="alignright clearfix">
   <ul class="clearfix">
@@ -79,12 +80,12 @@
     <div class="entry">
       
         <pre><code>本文来自网络，如有侵权请联系管理员
-</code></pre><h1 id="目录">目录</h1>
+</code></pre><h2 id="目录">目录</h2>
 <!-- MarkdownTOC -->
 
 <ul>
 <li><a href="#数组">数组</a><ul>
-<li><a href="#遍历">遍历</a></li>
+<li><a href="#遍历-方法">遍历 方法</a></li>
 <li><a href="#length属性">length属性</a></li>
 <li><a href="#array构造函数">Array构造函数</a></li>
 </ul>
@@ -96,20 +97,20 @@
 </li>
 <li><a href="#undefined和null">undefined和null</a><ul>
 <li><a href="#undefined的值">undefined的值</a></li>
-<li><a href="#处理undefined值的改变">处理undefined值的改变</a></li>
-<li><a href="#null的用处">null的用处</a></li>
+<li><a href="#处理-undefined-值的改变">处理 undefined 值的改变</a></li>
+<li><a href="#null-的用处">null 的用处</a></li>
 </ul>
 </li>
 <li><a href="#其他">其他</a><ul>
-<li><a href="#settimeout和setinterval">setTimeout和setInterval</a></li>
-<li><a href="#setinterval的堆调用">setInterval的堆调用</a></li>
+<li><a href="#settimeout-和-setinterval">setTimeout 和 setInterval</a></li>
+<li><a href="#setinterval-的堆调用">setInterval 的堆调用</a></li>
 </ul>
 </li>
 </ul>
 <!-- /MarkdownTOC -->
 
 <h2 id="数组">数组</h2>
-<h3 id="遍历">遍历</h3>
+<h3 id="遍历_方法">遍历 方法</h3>
 <p>为了达到遍历数组的最佳性能，推荐使用经典的 for 循环。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, ...... <span class="number">100000000</span>];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, l = list.length; i &lt; l; i++) {</div><div class="line">    <span class="built_in">console</span>.log(list[i]);</div><div class="line">}</div></pre></td></tr></table></figure>
 
@@ -174,7 +175,7 @@
 <li>函数参数没有被显式的传递值。</li>
 <li>任何被设置为 undefined 值的变量。</li>
 </ul>
-<h3 id="处理undefined值的改变">处理undefined值的改变</h3>
+<h3 id="处理_undefined_值的改变">处理 undefined 值的改变</h3>
 <p>由于全局变量 undefined 只是保存了 undefined 类型实际值的副本， 因此对它赋新值不会改变类型 undefined 的值。</p>
 <p>然而，为了方便其它变量和 undefined 做比较，我们需要事先获取类型 undefined 的值。</p>
 <p>为了避免可能对 undefined 值的改变，一个常用的技巧是使用一个传递到匿名包装器的额外参数。 在调用时，这个参数不会获取任何值。</p>
@@ -185,11 +186,11 @@
 
 <p>这里唯一的区别是，在压缩后并且函数内没有其它需要使用 var 声明变量的情况下，这个版本的代码会多出 4 个字节的代码。</p>
 <p>译者注：这里有点绕口，其实很简单。如果此函数内没有其它需要声明的变量，那么 var 总共 4 个字符（包含一个空白字符） 就是专门为 undefined 变量准备的，相比上个例子多出了 4 个字节。</p>
-<h3 id="null的用处">null的用处</h3>
+<h3 id="null_的用处">null 的用处</h3>
 <p>JavaScript 中的 undefined 的使用场景类似于其它语言中的 null，实际上 JavaScript 中的 null 是另外一种数据类型。</p>
 <p>它在 JavaScript 内部有一些使用场景（比如声明原型链的终结 Foo.prototype = null），但是大多数情况下都可以使用 undefined 来代替</p>
 <h2 id="其他">其他</h2>
-<h3 id="setTimeout和setInterval">setTimeout和setInterval</h3>
+<h3 id="setTimeout_和_setInterval">setTimeout 和 setInterval</h3>
 <p>由于 JavaScript 是异步的，可以使用 setTimeout 和 setInterval 来计划执行函数。</p>
 <p>注意: 定时处理不是 ECMAScript 的标准，它们在 DOM (文档对象模型) 被实现。<br>function foo() {}<br>var id = setTimeout(foo, 1000); // 返回一个大于零的数字<br>当 setTimeout 被调用时，它会返回一个 ID 标识并且计划在将来大约 1000 毫秒后调用 foo 函数。 foo 函数只会被执行一次。</p>
 <p>基于 JavaScript 引擎的计时策略，以及本质上的单线程运行方式，所以其它代码的运行可能会阻塞此线程。 因此没法确保函数会在 setTimeout 指定的时刻被调用。</p>
@@ -197,7 +198,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">this</span>.value = <span class="number">42</span>;</div><div class="line">    <span class="keyword">this</span>.method = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">        <span class="comment">// this 指向全局对象</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.value); <span class="comment">// 输出：undefined</span></div><div class="line">    };</div><div class="line">    setTimeout(<span class="keyword">this</span>.method, <span class="number">500</span>);</div><div class="line">}</div><div class="line"><span class="keyword">new</span> Foo();</div></pre></td></tr></table></figure>
 
 <p>注意: setTimeout 的第一个参数是函数对象，一个常犯的错误是这样的 setTimeout(foo(), 1000)， 这里回调函数是 foo 的返回值，而不是foo本身。 大部分情况下，这是一个潜在的错误，因为如果函数返回 undefined，setTimeout 也不会报错。</p>
-<h3 id="setInterval的堆调用">setInterval的堆调用</h3>
+<h3 id="setInterval_的堆调用">setInterval 的堆调用</h3>
 <p>setTimeout 只会执行回调函数一次，不过 setInterval - 正如名字建议的 - 会每隔 X 毫秒执行函数一次。 但是却不鼓励使用这个函数。</p>
 <p>当回调函数的执行被阻塞时，setInterval 仍然会发布更多的回调指令。在很小的定时间隔情况下，这会导致回调函数被堆积起来。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span>{</div><div class="line">    <span class="comment">// 阻塞执行 1 秒</span></div><div class="line">}</div><div class="line">setInterval(foo, <span class="number">1000</span>);</div></pre></td></tr></table></figure>
@@ -258,6 +259,8 @@
 
 <nav id="pagination">
   
+    <a href="/2014-09/如果你打算开始创业，我想告诉你的是…/" class="prev" title="如果你打算开始创业，我想告诉你的是…"><span id="prev">上一页</span></a>
+  
   
     <a href="/2014-08/一个亮点/" class="next" title="一个亮点"><span id="next">下一页</span></a>
   
@@ -276,28 +279,15 @@
 </div>
 <div class="clearfix"></div></footer>
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<script src="/js/jquery-1.8.3.min.js"></script>
-
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-53493334-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 <script src="/js/jquery.jruif.js"></script>
-<link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
 
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
 <script type="text/javascript">
 (function($){
 	var elem = document.createElement('canvas');
@@ -308,21 +298,19 @@
 		rollingLinks: true
 	});
 	//请求bing印象图片
-	var backg=(function(num,fadetime){
+	var backg=(function(num,fadeTime){
 	  		var bg=[];
 	  		for(var i=0;i<num;i++){
-	  			(function(){
-	  				var img={};
-	  				img.fade=fadetime;
-	  				img.src="http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15);
-	  				bg.push(img);
-	  			})();	
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
 			}
 			return bg;
-	  	})(6,5000);
+	  	})(5,5000);
 	//vegar插件
 	$.vegas('slideshow',{
-	  	delay: 12000,//多久换一幅图片
+	  	delay: 60000,//多久换一幅图片
 		backgrounds: backg
 	})( 'overlay', {
 		src:'/vegas/overlay.png',
@@ -333,13 +321,16 @@
 		$(this).addClass("loading");
 	});
 })(jQuery);
-
-(function(){
-	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
-})();
 </script>
 
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
 
 </body>
 </html>
