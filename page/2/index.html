@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 2 页 | Jruif&#39;s Blog | 九月学习重点：nodejs &amp; polymer</title>
+  <title>第 2 页 | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
   <meta name="author" content="jruif">
   
   <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
@@ -28,12 +28,12 @@
 
 <body>
   <header id="header" class="inner clearfix"><a href="/" class="alignleft">
-	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 九月学习重点：nodejs &amp; polymer">
+	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
 </a>
 <div class="header-myinfo">
 	<h1 class="header-title">Jruif&#39;s Blog</h1>
 	 
-	<span class="header-subtitle">九月学习重点：nodejs &amp; polymer</span>
+	<span class="header-subtitle">路漫漫其修远兮，吾将上下而求索</span>
 </div>
 <nav id="main-nav" class="alignright clearfix">
   <ul class="clearfix">
@@ -50,6 +50,115 @@
     <div id="main-col" class="alignleft"><div id="wrapper">
   
     
+  
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-06T09:17:37.000Z"><a href="/2014-08/阅读-jQuery-源码的18个惊喜/">2014 8月 6</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014-08/阅读-jQuery-源码的18个惊喜/">阅读 jQuery 源码的18个惊喜</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <pre><code>转载自网络
+</code></pre><p>我热爱 jQuery，且尽管我认为自己算是一名高级 JavaScript 开发者，我从来没有试过由头到尾把 jQuery 的源码看一遍，直到现在。这里分享一些我一路下来学到的东西：</p>
+<p>注意：我使用 $.fn.method() 语法来表示调用一组匹配元素的方法。比如当我说 $.fn.addClass，则表示$(‘div’).addClass(‘blue’) 或者 $(‘a.active’).addClass(‘in-use’) 此类的用法。$.fn 是 jQuery 包装元素的原型。</p>
+<p><strong>1. Sizzle</strong> 的权重：Sizzle 是 jQuery 用于在 DOM 找元素的的选择器引擎，基于 CSS 选择器。正是它将 $(‘div.active’)转换成可操作的元素数组。我知道 Sizzle 占了 jQuery 相当大的部分，但它的庞大还是吓到了我。按行数来说它很无疑是 jQuery 中唯一最庞大的特性。我估计它占了总代码库的 22%，而第二大的特性—— $.ajax 只占了 8%。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014-08/阅读-jQuery-源码的18个惊喜/#more" class="more-link">阅读全文 &gt;</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-05T03:19:48.000Z"><a href="/2014-08/你或许想要用到的三个新的Javascript-API/">2014 8月 5</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014-08/你或许想要用到的三个新的Javascript-API/">你或许想要用到的三个新的Javascript API</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <pre><code>本文由 伯乐在线 - 刘忻沂 翻译自 Aurelio De Rosa。
+</code></pre><p>　　如果你是一个SitePoint的老读者并且是我的粉丝的话，那么你已经知道我写了很多关于HTML5以及JS API的文章。到目前为止，我已经发布了一些介绍你现在就可以马上使用的API，尽管可能会用到polyfill的方式。（译注：不知道什么是polyfill请<a href="http://www.kankanews.com/ICkengine/archives/70998.shtml" target="_blank" rel="external">点击这里</a>。）</p>
+<p>但是今天我可能要打破这个常规来给大家介绍一些仍然还处在初期阶段的API。大家必须知道这些API是非常新的，在这三个里面有两个都是在几天之前刚刚发布的。正因如此，这些API现目前都还无法使用。但是如果你有兴趣了解它们具体是用来做什么的，你可以继续阅读下面关于它们的详细介绍，同时也欢迎留下你的看法和回应。</p>
+<p>废话不多说，现在开始！<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014-08/你或许想要用到的三个新的Javascript-API/#more" class="more-link">阅读全文 &gt;</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
   
 
 <article class="post">
