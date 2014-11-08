@@ -1,0 +1,229 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jquery中ready和和DOM的load事件 | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="jquery中ready和和DOM的load事件"/>
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><a href="/" class="alignleft">
+	<img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
+</a>
+<div class="header-myinfo">
+	<h1 class="header-title">Jruif&#39;s Blog</h1>
+	 
+	<span class="header-subtitle">路漫漫其修远兮，吾将上下而求索</span>
+</div>
+<nav id="main-nav" class="alignright clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+      <li><a href="/resume">About</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-08T07:50:04.000Z"><a href="/2014-11/jquery中ready和和DOM的load事件/">2014 11月 8</a></time>
+      
+      
+  
+    <h1 class="title">jquery中ready和和DOM的load事件</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>jquery中ready和和DOM的load事件</p>
+<p>常用的文档加载方法有以下三种（两种jquery的方法）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">		<span class="comment">//todo</span></div><div class="line">});</div><div class="line">$(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="comment">//todo</span></div><div class="line">});</div><div class="line"><span class="built_in">window</span>.load=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="comment">//todo</span></div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p><a id="more"></a><br>这三种方式中，第二种是第一种的简写，可以看作一种方式，那么ready和load有何区别？</p>
+<p>那我们看下DOM的文档加载的步骤：</p>
+<ul>
+<li>解析HTML结构；</li>
+<li>加载外部脚本和样式表文件；</li>
+<li>解析并执行脚本代码；</li>
+<li>构造HTML DOM模型；</li>
+<li>加载图片等外部文件；</li>
+<li>页面加载完毕。</li>
+</ul>
+<p>在举个测试用例吧</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"jQuery的ready方法"</span>);</div><div class="line">});</div><div class="line"><span class="built_in">window</span>.load=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"DOM的load方法"</span>);</div><div class="line">};</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"立即执行函数"</span>);</div></pre></td></tr></table></figure>
+
+<p>从以上步骤中，第三步执行的是立即执行函数，jquery的ready在第四步也就是构造HTML DOM模型的时候执行，而load在页面完全加载完之后执行。</p>
+<p>所以可以看的出这两个方法的区别是外部资源的文件的加载上。在现在，如果为了加载几个图片，甚至用户根本没有兴趣看的图片，而让用户无限制的等待是一个非常低级的用户体验问题，所以执行在资源加载之前的代码是完全有益无害的。</p>
+<p>我们看下jquery对ready 的实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 用于DOM ready的延期</span></div><div class="line"><span class="keyword">var</span> readyList;</div><div class="line"><span class="comment">//用于外部调用的ready函数</span></div><div class="line">jquery.fn.ready=<span class="function"><span class="keyword">function</span> <span class="params">(fn)</span> </span>{</div><div class="line">    <span class="comment">// 添加异步回调</span></div><div class="line">    jQuery.ready.promise().done(fn);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">}</div><div class="line"></div><div class="line">jQuery.extend({</div><div class="line">	<span class="comment">// 当DOM可用的时候设置为true</span></div><div class="line">	isReady: <span class="literal">false</span>,</div><div class="line">	<span class="comment">// 用来统计有多少个元素在等待的计数器</span></div><div class="line">	readyWait: <span class="number">1</span>,</div><div class="line">	<span class="comment">// 挂起（或释放）ready事件</span></div><div class="line">	holdReady: <span class="function"><span class="keyword">function</span><span class="params">( hold )</span> </span>{</div><div class="line">		<span class="keyword">if</span> ( hold ) {</div><div class="line">			jQuery.readyWait++;</div><div class="line">		} <span class="keyword">else</span> {</div><div class="line">			jQuery.ready( <span class="literal">true</span> );</div><div class="line">		}</div><div class="line">	},</div><div class="line"></div><div class="line">	<span class="comment">// 当DOM ready的时候进行处理</span></div><div class="line">	ready: <span class="function"><span class="keyword">function</span><span class="params">( wait )</span> </span>{</div><div class="line">		<span class="comment">// 如果DOM还没有准备好，则readyWait计数器自减，否则使用isReady标记的状态</span></div><div class="line">		<span class="comment">// 其实就是判断wait的状态有没有改变为false</span></div><div class="line">		<span class="keyword">if</span> ( wait === <span class="literal">true</span> ? --jQuery.readyWait : jQuery.isReady ) {</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		}</div><div class="line">		<span class="comment">// 用于标记DOM已经准备好</span></div><div class="line">		jQuery.isReady = <span class="literal">true</span>;</div><div class="line">		<span class="comment">// 如果正常的DOM ready事件已经发生</span></div><div class="line">		<span class="keyword">if</span> ( wait !== <span class="literal">true</span> && --jQuery.readyWait &gt; <span class="number">0</span> ) {</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		}</div><div class="line">		<span class="comment">// 执行被绑定在延迟对象上的函数（jquery的deferred.resolveWith() API）</span></div><div class="line">		readyList.resolveWith( <span class="built_in">document</span>, [ jQuery ] );</div><div class="line">		<span class="comment">// 触发绑定的ready事件，并解绑</span></div><div class="line">		<span class="keyword">if</span> ( jQuery.fn.triggerHandler ) {</div><div class="line">			jQuery( <span class="built_in">document</span> ).triggerHandler( <span class="string">"ready"</span> );</div><div class="line">			jQuery( <span class="built_in">document</span> ).off( <span class="string">"ready"</span> );</div><div class="line">		}</div><div class="line">	}</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>上面是jQuery对ready事件的包装过程，虽然简短的几局代码，还是可以看的出来惊心动魄的过程啊。</p>
+<p>而下面这段代码是jQuery对文档加载时机应用的处理过程</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * ready事件的处理函数，并解除事件监听</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">completed</span><span class="params">()</span> </span>{</div><div class="line">	<span class="built_in">document</span>.removeEventListener( <span class="string">"DOMContentLoaded"</span>, completed, <span class="literal">false</span> );</div><div class="line">	<span class="built_in">window</span>.removeEventListener( <span class="string">"load"</span>, completed, <span class="literal">false</span> );</div><div class="line">	jQuery.ready();</div><div class="line">}</div><div class="line">jQuery.ready.promise = <span class="function"><span class="keyword">function</span><span class="params">( obj )</span> </span>{</div><div class="line">	<span class="keyword">if</span> ( !readyList ) {</div><div class="line">		<span class="comment">// readyList的初始化为延迟对象</span></div><div class="line">		readyList = jQuery.Deferred();</div><div class="line">		<span class="comment">// 浏览器事件发生之后获取$(document).ready()被调用的情况</span></div><div class="line">		<span class="keyword">if</span> ( <span class="built_in">document</span>.readyState === <span class="string">"complete"</span> ) {</div><div class="line">			<span class="comment">// Handle it asynchronously to allow scripts the opportunity to delay ready</span></div><div class="line">			<span class="comment">// 用异步方式处理jQuery.ready，使脚本延时准备</span></div><div class="line">			setTimeout( jQuery.ready );</div><div class="line">		} <span class="keyword">else</span> {</div><div class="line">			<span class="comment">// 监听"DOMContentLoaded"事件</span></div><div class="line">			<span class="built_in">document</span>.addEventListener( <span class="string">"DOMContentLoaded"</span>, completed, <span class="literal">false</span> );</div><div class="line">			<span class="comment">// 备胎</span></div><div class="line">			<span class="built_in">window</span>.addEventListener( <span class="string">"load"</span>, completed, <span class="literal">false</span> );</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> readyList.promise( obj );</div><div class="line">};</div><div class="line"><span class="comment">// 不论终端有没有准备好都启动DOM ready检查</span></div><div class="line">jQuery.ready.promise();</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>DOMContentLoaded只在IE9+和现代浏览器上有，但是IE8-怎么办？jQuery作者使用document.readyState检测是否为完成状态，然后利用setTimeout触发ready函数，收益一定会在DOM ready完成之后执行，<br>还有一种<a href="http://javascript.nwbox.com/IEContentLoaded/" target="_blank" rel="external">方法</a>，是通过不断使用doScoll()方法，由于DOM没有准备完成的时候运行doScoll()会报错，所以必须把doScoll放在try/catch结构中,例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> {</div><div class="line">       <span class="comment">// If IE is used, use the trick by Diego Perini</span></div><div class="line">       <span class="comment">// http://javascript.nwbox.com/IEContentLoaded/</span></div><div class="line">       <span class="built_in">document</span>.documentElement.doScroll(<span class="string">"left"</span>);</div><div class="line">   } <span class="keyword">catch</span>( error ) {</div><div class="line">       setTimeout( <span class="built_in">arguments</span>.callee, <span class="number">0</span> );</div><div class="line">   }</div></pre></td></tr></table></figure>
+
+<blockquote>
+<p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/jquery/">jquery</a>, <a href="/tags/源码解读/">源码解读</a>, <a href="/tags/ready/">ready</a>, <a href="/tags/load/">load</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Jruif"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->    
+</section>
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/2014-10/运行grunt报错：Maximum-call-stack-size-exceeded的解决方案/" class="next" title="运行grunt报错：Maximum call stack size exceeded的解决方案"><span id="next">下一页</span></a>
+  
+  <div class="clearfix"></div>
+</nav>
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2014 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadeTime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
+			}
+			return bg;
+	  	})(5,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 60000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+</script>
+
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
+
+</body>
+</html>
+
