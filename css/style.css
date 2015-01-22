@@ -23,6 +23,7 @@ body {
 @media screen and (max-width: 600px) {
   body {
     font-size: 13px;
+    margin: 0 10px;
   }
 }
 h1,
@@ -36,11 +37,26 @@ h6 {
 h1 {
   font-size: 1.8em;
 }
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.6em;
+  }
+}
 h2 {
   font-size: 1.5em;
 }
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 1.4em;
+  }
+}
 h3 {
   font-size: 1.3em;
+}
+@media screen and (max-width: 600px) {
+  h3 {
+    font-size: 1.2em;
+  }
 }
 a {
   text-decoration: none;
@@ -108,15 +124,37 @@ a {
   line-height: 1;
   margin-top: 10px;
 }
-#header .avatar {
-  -webkit-border-radius: 40px;
-  border-radius: 40px;
-  -webkit-border-radius: 40px;
-  margin-left: 20px;
-}
 #header .header-myinfo {
+  margin: 0 30px;
+}
+@media screen and (min-width: 1001px) {
+  #header .header-myinfo {
+    width: 45%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #header .header-myinfo {
+    width: 404px;
+  }
+}
+@media screen and (max-width: 600px) {
+  #header .header-myinfo {
+    margin: 5px 0 0 15px;
+    width: 92%;
+  }
+}
+#header .header-myinfo>a {
   display: inline-block;
-  margin: 10px 0 0 30px;
+}
+#header .header-myinfo .header-myinfo-con {
+  overflow: hidden;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+@media screen and (max-width: 600px) {
+  #header .header-myinfo .header-myinfo-con {
+    padding-top: 5px;
+  }
 }
 #header .header-myinfo .header-title {
   margin-bottom: 15px;
@@ -125,12 +163,35 @@ a {
 #header .header-myinfo .header-subtitle {
   color: #999;
 }
+#header .avatar {
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+  -webkit-border-radius: 40px;
+}
+@media screen and (max-width: 600px) {
+  #header .avatar {
+    width: 60px;
+  }
+}
 #header #main-nav {
   font-family: "Microsoft YaHei", "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 2.5em;
   line-height: 1.2em;
-  margin-right: 30px;
   margin-top: 30px;
+  overflow: hidden;
+}
+@media screen and (max-width: 900px) {
+  #header #main-nav {
+    font-size: 1.5em;
+    margin-top: 45px;
+  }
+}
+@media screen and (max-width: 800px) {
+  #header #main-nav {
+    font-size: 1.5em;
+    margin-top: 20px;
+    float: left;
+  }
 }
 #header #main-nav ul {
   list-style: none;
@@ -146,7 +207,7 @@ a {
   -o-transition: all 0.3s;
   -ms-transition: all 0.3s;
   transition: all 0.3s;
-  text-shadow: 0 0 30px #999;
+  text-shadow: 0 0 10px #999;
 }
 article {
   background: #fff;
@@ -171,16 +232,7 @@ article.page {
 article.page .icon {
   display: none;
 }
-article.post .icon:before {
-  content: '\f016';
-}
-article.photo .icon:before {
-  content: '\f030';
-}
-article.link .icon:before {
-  content: '\f0c1';
-}
-article.link .title a:after {
+article.page .title a:after {
   content: '\f08e';
   color: #999;
   font: 12px font-icon;
@@ -188,7 +240,7 @@ article.link .title a:after {
   vertical-align: super;
 }
 article .post-content {
-  padding: 20px 20px 15px 77px;
+  padding: 20px 20px 15px;
   margin-bottom: 20px;
   position: relative;
 }
@@ -512,13 +564,12 @@ article footer .addthis iframe {
 }
 #pagination a {
   position: fixed;
-  top: 50%;
+  bottom: 0;
   display: block;
-  padding: 10px 10px;
-  background: #30918d;
+  padding: 0 10px;
   font-family: "Microsoft YaHei", "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
   text-shadow: 0 0 1px #fff;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   text-indent: -99999px;
 }
 #pagination a span {
