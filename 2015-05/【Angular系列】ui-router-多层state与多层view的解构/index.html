@@ -1,0 +1,271 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Angular系列】ui-router 多层state与多层view的解构 | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Angular系列】ui-router 多层state与多层view的解构"/>
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><div class="header-myinfo alignleft clearfix">
+    <a href="/" class="alignleft">
+        <img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
+    </a>
+    <div class="header-myinfo-con">
+        <h1 class="header-title">Jruif&#39;s Blog</h1>
+         
+            <span class="header-subtitle">
+                路漫漫其修远兮，吾将上下而求索
+            </span>
+        
+    </div>
+</div>
+<nav id="main-nav" class="clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+      <li><a href="/resume">About</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-05-21T14:13:06.000Z"><a href="/2015-05/【Angular系列】ui-router-多层state与多层view的解构/">2015-05-21</a></time>
+      
+      
+  
+    <h1 class="title">【Angular系列】ui-router 多层state与多层view的解构</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>本文为博主Jruif翻译作品，如有不当之处请悉心指正，如转载请注明译品以及英语原文出处，<a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-and-Nested-Views" target="_blank" rel="external">英语原文地址</a></p>
+</blockquote>
+<h2 id="嵌套状态的方法">嵌套状态的方法</h2><p>状态能被其他状态嵌套。有以下几种嵌套情况：</p>
+<ol>
+<li>使用点‘.’符号，例如：<code>.state(&#39;contacts.list&#39;, {})</code>。</li>
+<li>使用<a href="https://github.com/marklagendijk/ui-router.stateHelper" target="_blank" rel="external">ui-router.stateHelper</a>建立一个嵌套状态树。</li>
+<li>使用以 <strong>string</strong> 类型的父级名的 <code>parent</code> 属性，例如：<code>parent: &#39;contacts&#39;</code></li>
+<li>使用以 <strong>object</strong> 类型的父级状态的 <code>parent</code>属性，例如：<code>parent: contacts</code>（这里的’contacts’是一个状态对象）</li>
+</ol>
+<a id="more"></a>
+<h3 id="点符号">点符号</h3><p>你可以使用点来构建应用的层级关系，如下所示， <code>contacts.list</code>就变成了<code>contacts</code>的子状态。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(<span class="string">'contacts'</span>, &#123;&#125;)</span><br><span class="line">  .state(<span class="string">'contacts.list'</span>, &#123;&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="stateHelper_模块">stateHelper 模块</h3><p>有一个由 @marklagendijk 创建的第三方组件可以帮你构建嵌套状态。所以你可以通过引用来使用<a href="https://github.com/marklagendijk/ui-router.stateHelper" target="_blank" rel="external">点击这里了解更多有关 stateHelper 的信息</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myApp'</span>, [<span class="string">'ui.router'</span>, <span class="string">'ui.router.stateHelper'</span>])</span><br><span class="line">  .config(<span class="function"><span class="keyword">function</span>(<span class="params">stateHelperProvider</span>)</span>&#123;</span><br><span class="line">    stateHelperProvider.setNestedState(&#123;</span><br><span class="line">      name: <span class="string">'root'</span>,</span><br><span class="line">      templateUrl: <span class="string">'root.html'</span>,</span><br><span class="line">      children: [</span><br><span class="line">        &#123;</span><br><span class="line">          name: <span class="string">'contacts'</span>,</span><br><span class="line">          templateUrl: <span class="string">'contacts.html'</span>,</span><br><span class="line">          children: [</span><br><span class="line">            &#123;</span><br><span class="line">              name: <span class="string">'list'</span>,</span><br><span class="line">              templateUrl: <span class="string">'contacts.list.html'</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name: <span class="string">'products'</span>,</span><br><span class="line">          templateUrl: <span class="string">'products.html'</span>,</span><br><span class="line">          children: [</span><br><span class="line">            &#123;</span><br><span class="line">              name: <span class="string">'list'</span>,</span><br><span class="line">              templateUrl: <span class="string">'products.list.html'</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="使用parent属性构建嵌套">使用parent属性构建嵌套</h3><p>parent属性的赋值有两种类型，一种是String，一种是Object。<br>这两种类型的值都是父级的名字或者状态对象，可以参考以下示例了解。</p>
+<p>基于字符串的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(<span class="string">'contacts'</span>, &#123;&#125;)</span><br><span class="line">  .state(<span class="string">'list'</span>, &#123;</span><br><span class="line">    parent: <span class="string">'contacts'</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>基于对象的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> contacts = &#123;</span><br><span class="line">    name: <span class="string">'contacts'</span>,  <span class="comment">//必须</span></span><br><span class="line">    templateUrl: <span class="string">'contacts.html'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> contactsList = &#123;</span><br><span class="line">    name: <span class="string">'contacts.list'</span>, <span class="comment">//必须</span></span><br><span class="line">    parent: contacts,  <span class="comment">//必须</span></span><br><span class="line">    templateUrl: <span class="string">'contacts.list.html'</span></span><br><span class="line">&#125;</span><br><span class="line">$stateProvider</span><br><span class="line">  .state(contacts)</span><br><span class="line">  .state(contactsList)</span><br></pre></td></tr></table></figure></p>
+<p>当你使用其他方法或属性做比较的时候可以直接引用对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$state.transitionTo(states.contacts);</span><br><span class="line">$state.current === states.contacts;</span><br><span class="line">$state.includes(states.contacts)</span><br></pre></td></tr></table></figure></p>
+<h2 id="关于状态的顺序">关于状态的顺序</h2><p>你可以定义任意顺序的状态或在不同的模块中定义状态。也可以在定义父状态前先定义了子状态。在程序执行的时候，ui-route会在父状态定义了之后定义子状态。<br>所以说你定义嵌套状态的时候，不用计较状态的先后循序，甚至可以在不同的模块中。</p>
+<h2 id="父级必须存在">父级必须存在</h2><p>如果你只定义了一个单一的状态，就像 <code>contacts.list</code>，那么你必须定义一个叫做<code>contacts</code>的状态，否则你定义的 <code>contacts.list</code><br>就不会执行。你也不能查出任何错误，所以你要谨记这一点。</p>
+<h2 id="给你的状态命名">给你的状态命名</h2><p>不能有两个相同名字的状态。当你使用<code>parent</code>属性来构建嵌套状态的时候，也不能定义相同的名字，即使有不同的父级，也并没有<br>改变这个状态的名字，例如，你不能定义两个叫“edit”的状态，即使他们的父级不一样。当然，使用点符号的方式除外，例如<code>one.edit</code><br>和<code>two.edit</code>是可以使用的。</p>
+<h2 id="嵌套状态和视图">嵌套状态和视图</h2><p>当应用处于一种特殊的状态——“active”的时候，他的父级以上的状态也会隐含的变为<code>active</code>，如下所示，当状态 <code>contacts.list</code>变为active的时候，<code>contacts</code>也隐含的变为active，因为他是”contacts.list”的父级状态。<br>子状态将会导入自己的模板到他父级的 <code>ui-view</code>中。</p>
+<p>完整示例: <a href="http://plnkr.co/edit/7FD5Wf?p=preview" target="_blank" rel="external">http://plnkr.co/edit/7FD5Wf?p=preview</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">  .state(<span class="string">'contacts'</span>, &#123;</span><br><span class="line">    templateUrl: <span class="string">'contacts.html'</span>,</span><br><span class="line">    controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</span><br><span class="line">      $scope.contacts = [&#123; name: <span class="string">'Alice'</span> &#125;, &#123; name: <span class="string">'Bob'</span> &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  .state(<span class="string">'contacts.list'</span>, &#123;</span><br><span class="line">    templateUrl: <span class="string">'contacts.list.html'</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MainCtrl</span>(<span class="params">$state</span>)</span>&#123;</span><br><span class="line">  $state.transitionTo(<span class="string">'contacts.list'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">ng-controller</span>=<span class="value">"MainCtrl"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- contacts.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>My Contacts<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- contacts.list.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"contact in contacts"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">a</span>&gt;</span>&#123;&#123;contact.name&#125;&#125;<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="子状态是如何从父状态继承的？">子状态是如何从父状态继承的？</h3><p>子状态是怎样从父状态继承的：</p>
+<ul>
+<li><a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#wiki-inherited-resolved-dependencies" target="_blank" rel="external">通过<code>resolve</code>解决依赖关系</a></li>
+<li><a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#wiki-inherited-custom-data" target="_blank" rel="external">使用自定义 <code>data</code>属性</a></li>
+</ul>
+<p>除此之外，并没有其他方式（没有controllers, templates, url等）</p>
+<h3 id="继承的解决依赖关系">继承的解决依赖关系</h3><p>在版本0.2.0中，子状态将继承解决依赖关系，他们能够被重载。我们能够继承解决依赖关系在子状态的controllers和resolve函数中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider.state(<span class="string">'parent'</span>, &#123;</span><br><span class="line">      resolve:&#123;</span><br><span class="line">         resA:  <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="string">'value'</span>: <span class="string">'A'</span>&#125;;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope, resA</span>)</span>&#123;</span><br><span class="line">          $scope.resA = resA.value;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">   .state(<span class="string">'parent.child'</span>, &#123;</span><br><span class="line">      resolve:&#123;</span><br><span class="line">         resB: <span class="function"><span class="keyword">function</span>(<span class="params">resA</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="string">'value'</span>: resA.value + <span class="string">'B'</span>&#125;;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope, resA, resB</span>)</span>&#123;</span><br><span class="line">          $scope.resA2 = resA.value;</span><br><span class="line">          $scope.resB = resB.value;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>:</p>
+<p>　- 关键字<code>resolve</code>只能用于没有<code>views</code>的<code>state</code>（防止使用多个视图）。<br>　- 如果你想等待promises将被resolved之前实例化子状态，关键字<code>resolve</code>必须被子状态注入。</p>
+<h3 id="继承自定义数据">继承自定义数据</h3><p>子状态将继承父状态的data属性，并能够重载。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider.state(<span class="string">'parent'</span>, &#123;</span><br><span class="line">      data:&#123;</span><br><span class="line">         customData1:  <span class="string">"Hello"</span>,</span><br><span class="line">         customData2:  <span class="string">"World!"</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">   .state(<span class="string">'parent.child'</span>, &#123;</span><br><span class="line">      data:&#123;</span><br><span class="line">         <span class="comment">// customData1 inherited from 'parent'</span></span><br><span class="line">         <span class="comment">// but we'll overwrite customData2</span></span><br><span class="line">         customData2:  <span class="string">"UI-Router!"</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">$rootScope.$on(<span class="string">'$stateChangeStart'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, toState</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> greeting = toState.data.customData1 + <span class="string">" "</span> + toState.data.customData2;</span><br><span class="line">    <span class="built_in">console</span>.log(greeting);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Would print "Hello World!" when 'parent' is activated</span></span><br><span class="line">    <span class="comment">// Would print "Hello UI-Router!" when 'parent.child' is activated</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Scope只通过View层级继承">Scope只通过View层级继承</h3><p>如果你的多个状态视图是嵌套的，只要记住scope只继承它状态链下的属性。嵌套的scope属性与你嵌套的状态和嵌套的视图（templates）<br>毫无关系。</p>
+<p>完全有<a href="https://github.com/angular-ui/ui-router/wiki/Multiple-Named-Views#view-names---relative-vs-absolute-names" target="_blank" rel="external">可能</a>在你的页面中，嵌套的视图的模板填入了没有嵌套的地方的ui-views。在这一假设存在的情况下，你不能确保在子状态视图中使用<br>了父状态视图中的scope变量。</p>
+<h2 id="纯形式上的（抽象）状态">　纯形式上的（抽象）状态</h2><p>一个纯形式上的状态也可以拥有子状态，当时它不能激活他自己。’abstract’状态只是一个不能被转换的简单状态。只有它的后代被激活的<br>时候他会被隐含的激活。</p>
+<p>一些使用纯形式上的状态的示例：</p>
+<ul>
+<li>过渡到其他子url的<a href="https://github.com/angular-ui/ui-router/wiki/URL-Routing#url-routing-for-nested-states" target="_blank" rel="external"><code>url</code></a></li>
+<li><p>To insert a <a href="https://github.com/angular-ui/ui-router/wiki#templates" target="_blank" rel="external"><code>template</code></a> with its own <code>ui-view(s)</code> that its child states will populate.</p>
+<ul>
+<li>Optionally assign a <code>controller</code> to the template. The controller <strong>must</strong> pair to a template.</li>
+<li>Additionally, inherit $scope objects down to children, just understand that this happens via the <a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#scope-inheritance-by-view-hierarchy-only" target="_blank" rel="external">view hierarchy</a>, not the state hierarchy.</li>
+</ul>
+</li>
+<li>To <a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#inherited-resolved-dependencies" target="_blank" rel="external">provide resolved dependencies</a> via <code>resolve</code> for use by child states.</li>
+<li>To <a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#inherited-custom-data" target="_blank" rel="external">provide inherited custom data</a> via <code>data</code> for use by child states or an event listener.</li>
+<li>To run an <code>onEnter</code> or <code>onExit</code> function that may modify the application in someway.</li>
+<li>Any combination of the above.</li>
+</ul>
+<p><strong>记住：</strong> 形式上的状态也需要他自己的<code>&lt;ui-view/&gt;</code>，用来让它的子状态视图嵌入。所以你要如果使用一个抽象状态只是做一个预备的url<br>，你需要设置resolves/data，或者添加一个onEnter/Exit函数，然后你还要设置<code>template: &quot;&lt;ui-view/&gt;&quot;</code>。</p>
+<h3 id="抽象状态使用示例">　抽象状态使用示例</h3><p><strong>To prepend url to child state urls</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">    .state(<span class="string">'contacts'</span>, &#123;</span><br><span class="line">        abstract: <span class="literal">true</span>,</span><br><span class="line">        url: <span class="string">'/contacts'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Note: abstract still needs a ui-view for its children to populate.</span></span><br><span class="line">        <span class="comment">// You can simply add it inline here.</span></span><br><span class="line">        template: <span class="string">'&lt;ui-view/&gt;'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .state(<span class="string">'contacts.list'</span>, &#123;</span><br><span class="line">        <span class="comment">// url will become '/contacts/list'</span></span><br><span class="line">        url: <span class="string">'/list'</span></span><br><span class="line">        <span class="comment">//...more</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .state(<span class="string">'contacts.detail'</span>, &#123;</span><br><span class="line">        <span class="comment">// url will become '/contacts/detail'</span></span><br><span class="line">        url: <span class="string">'/detail'</span>,</span><br><span class="line">        <span class="comment">//...more</span></span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<p><strong>To insert a template with its own <code>ui-view</code> for child states to populate</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">    .state(<span class="string">'contacts'</span>, &#123;</span><br><span class="line">        abstract: <span class="literal">true</span>,</span><br><span class="line">        templateUrl: <span class="string">'contacts.html'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .state(<span class="string">'contacts.list'</span>, &#123;</span><br><span class="line">        <span class="comment">// loaded into ui-view of parent's template</span></span><br><span class="line">        templateUrl: <span class="string">'contacts.list.html'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .state(<span class="string">'contacts.detail'</span>, &#123;</span><br><span class="line">        <span class="comment">// loaded into ui-view of parent's template</span></span><br><span class="line">        templateUrl: <span class="string">'contacts.detail.html'</span></span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- contacts.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>Contacts Page<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Combination</strong></p>
+<p>Shows prepended url, inserted template, paired controller, and inherited $scope object.</p>
+<p>Full Plunkr Here: <a href="http://plnkr.co/edit/gmtcE2?p=preview" target="_blank" rel="external">http://plnkr.co/edit/gmtcE2?p=preview</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">    .state(<span class="string">'contacts'</span>, &#123;</span><br><span class="line">        abstract: <span class="literal">true</span>,</span><br><span class="line">        url: <span class="string">'/contacts'</span>,</span><br><span class="line">        templateUrl: <span class="string">'contacts.html'</span>,</span><br><span class="line">        controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</span><br><span class="line">            $scope.contacts = [&#123; id:<span class="number">0</span>, name: <span class="string">"Alice"</span> &#125;, &#123; id:<span class="number">1</span>, name: <span class="string">"Bob"</span> &#125;];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .state(<span class="string">'contacts.list'</span>, &#123;</span><br><span class="line">        url: <span class="string">'/list'</span>,</span><br><span class="line">        templateUrl: <span class="string">'contacts.list.html'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .state(<span class="string">'contacts.detail'</span>, &#123;</span><br><span class="line">        url: <span class="string">'/:id'</span>,</span><br><span class="line">        templateUrl: <span class="string">'contacts.detail.html'</span>,</span><br><span class="line">        controller: <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $stateParams</span>)</span>&#123;</span><br><span class="line">          $scope.person = $scope.contacts[$stateParams.id];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- contacts.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>Contacts Page<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- contacts.list.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"person in contacts"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">ng-href</span>=<span class="value">"#/contacts/&#123;&#123;person.id&#125;&#125;"</span>&gt;</span>&#123;&#123;person.name&#125;&#125;<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- contacts.detail.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">h2</span>&gt;</span>&#123;&#123; person.name &#125;&#125;<span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>再次声明：欢迎转载，无偿奉献，但请注明出处，谢谢</p>
+<p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>，共同探讨Angular的神奇之处，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/angular/">angular</a>, <a href="/tags/states/">states</a>, <a href="/tags/ui-router/">ui-router</a>, <a href="/tags/views/">views</a>, <a href="/tags/嵌套状态/">嵌套状态</a>, <a href="/tags/嵌套视图/">嵌套视图</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Jruif"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->    
+</section>
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/2015-02/这绝对是好东西/" class="next" title="这绝对是好东西"><span id="next">下一页</span></a>
+  
+  <div class="clearfix"></div>
+</nav>
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2015 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadeTime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
+			}
+			return bg;
+	  	})(5,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 60000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+</script>
+
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
+
+</body>
+</html>
+
