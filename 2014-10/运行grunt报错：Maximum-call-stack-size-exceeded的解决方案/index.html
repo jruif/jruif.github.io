@@ -74,7 +74,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-30T16:48:34.000Z"><a href="/2014-10/运行grunt报错：Maximum-call-stack-size-exceeded的解决方案/">2014 10月 31</a></time>
+        <time datetime="2014-10-30T16:48:34.000Z"><a href="/2014-10/运行grunt报错：Maximum-call-stack-size-exceeded的解决方案/">2014-10-31</a></time>
       
       
   
@@ -85,20 +85,11 @@
     <div class="entry">
       
         <p>这是我前两天晚上遇到的一个问题，之前没有碰见过，突然碰到了，让我很迷惑怎么调用的堆栈超过了限制，怎么都找不到问题的所在，只好一行一行的删除代码使用排除法，最后定位到是处理less文件的任务出了问题，最后终于在一个文档中找到了问题的所在：</p>
-<p>You probably created an alias task with the same name as one of your regular tasks.<br>Example: </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">'less'</span>, [<span class="string">'less:build'</span>]);</div></pre></td></tr></table></figure>
-
-<p>should be </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">'myless'</span>, [<span class="string">'less:build'</span>]);</div></pre></td></tr></table></figure>
-
-
+<p>You probably created an alias task with the same name as one of your regular tasks.<br>Example:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'less'</span>, [<span class="string">'less:build'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>should be<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'myless'</span>, [<span class="string">'less:build'</span>]);</span><br></pre></td></tr></table></figure></p>
 <p>//中文：为什么我运行grunt得到一个 “Maximum call stack size exceeded”错误？</p>
-<p>你可能创建了一个和常规任务相同名字的别名任务。例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">'less'</span>, [<span class="string">'less:build'</span>]);</div></pre></td></tr></table></figure>
-
-<p>应该是</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">'myless'</span>, [<span class="string">'less:build'</span>]);</div></pre></td></tr></table></figure>
-
+<p>你可能创建了一个和常规任务相同名字的别名任务。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'less'</span>, [<span class="string">'less:build'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>应该是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'myless'</span>, [<span class="string">'less:build'</span>]);</span><br></pre></td></tr></table></figure></p>
 <p>都是没仔细看文档的后果啊。</p>
 <blockquote>
 <p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
@@ -112,7 +103,7 @@
         
   
   <div class="tags">
-    <a href="/tags/grunt/">grunt</a>, <a href="/tags/exceeded/">exceeded</a>
+    <a href="/tags/exceeded/">exceeded</a>, <a href="/tags/grunt/">grunt</a>
   </div>
 
         

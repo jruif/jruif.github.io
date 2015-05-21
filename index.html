@@ -75,7 +75,67 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-02-13T08:35:39.000Z"><a href="/2015-02/这绝对是好东西/">2015 2月 13</a></time>
+        <time datetime="2015-05-21T14:13:06.000Z"><a href="/2015-05/【Angular系列】ui-router-多层state与多层view的解构/">2015-05-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015-05/【Angular系列】ui-router-多层state与多层view的解构/">【Angular系列】ui-router 多层state与多层view的解构</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>本文为博主Jruif翻译作品，如有不当之处请悉心指正，如转载请注明译品以及英语原文出处，<a href="https://github.com/angular-ui/ui-router/wiki/Nested-States-and-Nested-Views">英语原文地址</a></p>
+</blockquote>
+<h2 id="嵌套状态的方法">嵌套状态的方法</h2><p>状态能被其他状态嵌套。有以下几种嵌套情况：</p>
+<ol>
+<li>使用点‘.’符号，例如：<code>.state(&#39;contacts.list&#39;, {})</code>。</li>
+<li>使用<a href="https://github.com/marklagendijk/ui-router.stateHelper">ui-router.stateHelper</a>建立一个嵌套状态树。</li>
+<li>使用以 <strong>string</strong> 类型的父级名的 <code>parent</code> 属性，例如：<code>parent: &#39;contacts&#39;</code></li>
+<li>使用以 <strong>object</strong> 类型的父级状态的 <code>parent</code>属性，例如：<code>parent: contacts</code>（这里的’contacts’是一个状态对象）</li>
+</ol>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015-05/【Angular系列】ui-router-多层state与多层view的解构/#more" class="more-link">阅读全文 &gt;</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-13T08:35:39.000Z"><a href="/2015-02/这绝对是好东西/">2015-02-13</a></time>
       
       
   
@@ -126,7 +186,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-11-08T07:50:04.000Z"><a href="/2014-11/jquery中ready和和DOM的load事件/">2014 11月 8</a></time>
+        <time datetime="2014-11-08T07:50:04.000Z"><a href="/2014-11/jquery中ready和和DOM的load事件/">2014-11-08</a></time>
       
       
   
@@ -138,9 +198,7 @@
       
         <p>jquery中ready和和DOM的load事件</p>
 <p>常用的文档加载方法有以下三种（两种jquery的方法）：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">		<span class="comment">//todo</span></div><div class="line">});</div><div class="line">$(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="comment">//todo</span></div><div class="line">});</div><div class="line"><span class="built_in">window</span>.load=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="comment">//todo</span></div><div class="line">};</div></pre></td></tr></table></figure>
-
-<p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">//todo</span></span><br><span class="line">&#125;);</span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//todo</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">window</span>.load=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//todo</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -181,7 +239,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-30T16:48:34.000Z"><a href="/2014-10/运行grunt报错：Maximum-call-stack-size-exceeded的解决方案/">2014 10月 31</a></time>
+        <time datetime="2014-10-30T16:48:34.000Z"><a href="/2014-10/运行grunt报错：Maximum-call-stack-size-exceeded的解决方案/">2014-10-31</a></time>
       
       
   
@@ -192,20 +250,11 @@
     <div class="entry">
       
         <p>这是我前两天晚上遇到的一个问题，之前没有碰见过，突然碰到了，让我很迷惑怎么调用的堆栈超过了限制，怎么都找不到问题的所在，只好一行一行的删除代码使用排除法，最后定位到是处理less文件的任务出了问题，最后终于在一个文档中找到了问题的所在：</p>
-<p>You probably created an alias task with the same name as one of your regular tasks.<br>Example: </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">'less'</span>, [<span class="string">'less:build'</span>]);</div></pre></td></tr></table></figure>
-
-<p>should be </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">'myless'</span>, [<span class="string">'less:build'</span>]);</div></pre></td></tr></table></figure>
-
-
+<p>You probably created an alias task with the same name as one of your regular tasks.<br>Example:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'less'</span>, [<span class="string">'less:build'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>should be<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'myless'</span>, [<span class="string">'less:build'</span>]);</span><br></pre></td></tr></table></figure></p>
 <p>//中文：为什么我运行grunt得到一个 “Maximum call stack size exceeded”错误？</p>
-<p>你可能创建了一个和常规任务相同名字的别名任务。例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">'less'</span>, [<span class="string">'less:build'</span>]);</div></pre></td></tr></table></figure>
-
-<p>应该是</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grunt.registerTask(<span class="string">'myless'</span>, [<span class="string">'less:build'</span>]);</div></pre></td></tr></table></figure>
-
+<p>你可能创建了一个和常规任务相同名字的别名任务。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'less'</span>, [<span class="string">'less:build'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>应该是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grunt.registerTask(<span class="string">'myless'</span>, [<span class="string">'less:build'</span>]);</span><br></pre></td></tr></table></figure></p>
 <p>都是没仔细看文档的后果啊。</p>
 <blockquote>
 <p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
@@ -247,7 +296,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-27T14:16:39.000Z"><a href="/2014-10/HTML-5-History-API的前生今世/">2014 10月 27</a></time>
+        <time datetime="2014-10-27T14:16:39.000Z"><a href="/2014-10/HTML-5-History-API的前生今世/">2014-10-27</a></time>
       
       
   
@@ -258,7 +307,6 @@
     <div class="entry">
       
         <!-- MarkdownTOC -->
-
 <ul>
 <li><a href="#为什么介绍history-api-？">为什么介绍History API ？</a></li>
 <li><a href="#浏览器支持">浏览器支持</a></li>
@@ -271,8 +319,6 @@
 <li><a href="#总结">总结</a></li>
 </ul>
 <!-- /MarkdownTOC -->
-
-
 <p>History是有趣的，不是吗？在之前的HTML版本中，我们对浏览历史记录的操作非常有限。我们可以来回使用可以使用的方法，但这就是一切我们能做的了。</p>
 <p>但是，利用HTML 5的History API，我们可以更好的控制浏览器的历史记录了。例如：我们可以添加一条记录到历史记录的列表中，或者在没有刷新时，可以更新地址栏的URL。<br>
       
@@ -315,7 +361,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-18T09:21:13.000Z"><a href="/2014-10/《黑客与画家》读书笔记/">2014 10月 18</a></time>
+        <time datetime="2014-10-18T09:21:13.000Z"><a href="/2014-10/《黑客与画家》读书笔记/">2014-10-18</a></time>
       
       
   
@@ -326,7 +372,6 @@
     <div class="entry">
       
         <!-- MarkdownTOC -->
-
 <ul>
 <li><a href="#趋同性">趋同性</a></li>
 <li><a href="#老员工与新人的关系">老员工与新人的关系</a></li>
@@ -343,18 +388,14 @@
 <li><a href="#公司的成长">公司的成长</a></li>
 </ul>
 <!-- /MarkdownTOC -->
-
-
-<h2 id="趋同性">趋同性</h2>
-<ul>
+<h2 id="趋同性">趋同性</h2><ul>
 <li>一群孩子结伙欺负你，并不是你做错了什么，而是因为这伙人需要找一件事一起干；</li>
 <li>他们实际上并不恨你，他们只是需要一个共同的目标；</li>
 <li>使用毒品基于同样的道理；</li>
 <li>怪人使用毒品，是为了建立他们之间的社会纽带；</li>
 <li>因为毒品是非法的，所以一起使用的话，就创造出一种共同的反叛感；</li>
 </ul>
-<h2 id="老员工与新人的关系">老员工与新人的关系</h2>
-<ul>
+<h2 id="老员工与新人的关系">老员工与新人的关系</h2><ul>
 <li>如果存在真正的外部能力测试，那么待在等级关系的底层也不会那么痛苦；
       
     </div>
@@ -396,7 +437,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-09-22T10:29:08.000Z"><a href="/2014-09/阅读underscore源码笔记/">2014 9月 22</a></time>
+        <time datetime="2014-09-22T10:29:08.000Z"><a href="/2014-09/阅读underscore源码笔记/">2014-09-22</a></time>
       
       
   
@@ -407,7 +448,7 @@
     <div class="entry">
       
         <pre><code>本文为原创作品，可以转载，但请添加本文连接，谢谢传阅
-</code></pre><p>underscorejs，一个实用的的Javascript函数库，值得推荐，<a href="http://underscorejs.org" target="_blank" rel="external">官网地址</a>，<a href="https://github.com/jashkenas/underscore" target="_blank" rel="external">Github仓库</a>，<a href="http://underscorejs.org/docs/underscore.html" target="_blank" rel="external">有注释的源码</a><br>
+</code></pre><p>underscorejs，一个实用的的Javascript函数库，值得推荐，<a href="http://underscorejs.org">官网地址</a>，<a href="https://github.com/jashkenas/underscore">Github仓库</a>，<a href="http://underscorejs.org/docs/underscore.html">有注释的源码</a><br>
       
     </div>
     <footer>
@@ -448,7 +489,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-09-18T03:34:33.000Z"><a href="/2014-09/如果你打算开始创业，我想告诉你的是…/">2014 9月 18</a></time>
+        <time datetime="2014-09-18T03:34:33.000Z"><a href="/2014-09/如果你打算开始创业，我想告诉你的是…/">2014-09-18</a></time>
       
       
   
@@ -500,7 +541,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-09-15T03:14:41.000Z"><a href="/2014-09/Javascript秘密花园[摘录]/">2014 9月 15</a></time>
+        <time datetime="2014-09-15T03:14:41.000Z"><a href="/2014-09/Javascript秘密花园[摘录]/">2014-09-15</a></time>
       
       
   
@@ -511,9 +552,7 @@
     <div class="entry">
       
         <pre><code>本文来自网络，如有侵权请联系管理员
-</code></pre><h2 id="目录">目录</h2>
-<!-- MarkdownTOC -->
-
+</code></pre><h2 id="目录">目录</h2><!-- MarkdownTOC -->
 <ul>
 <li><a href="#数组">数组</a><ul>
 <li><a href="#遍历-方法">遍历 方法</a></li>
@@ -539,12 +578,8 @@
 </li>
 </ul>
 <!-- /MarkdownTOC -->
-
-<h2 id="数组">数组</h2>
-<h3 id="遍历_方法">遍历 方法</h3>
-<p>为了达到遍历数组的最佳性能，推荐使用经典的 for 循环。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, ...... <span class="number">100000000</span>];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, l = list.length; i &lt; l; i++) {</div><div class="line">    <span class="built_in">console</span>.log(list[i]);</div><div class="line">}</div></pre></td></tr></table></figure>
-
+<h2 id="数组">数组</h2><h3 id="遍历_方法">遍历 方法</h3><p>为了达到遍历数组的最佳性能，推荐使用经典的 for 循环。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, ...... <span class="number">100000000</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, l = list.length; i &lt; l; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(list[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面代码有一个处理，就是通过 l = list.length 来缓存数组的长度。<br>
       
     </div>
@@ -586,7 +621,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-08-28T06:58:16.000Z"><a href="/2014-08/一个亮点/">2014 8月 28</a></time>
+        <time datetime="2014-08-28T06:58:16.000Z"><a href="/2014-08/一个亮点/">2014-08-28</a></time>
       
       
   
@@ -605,59 +640,6 @@
         
           <div class="alignleft">
             <a href="/2014-08/一个亮点/#more" class="more-link">阅读全文 &gt;</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  
-
-<article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-08-13T07:25:52.000Z"><a href="/2014-08/通过终端调试-AngularJS-应用/">2014 8月 13</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014-08/通过终端调试-AngularJS-应用/">通过终端调试 AngularJS 应用</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <pre><code>本文来自网络，如有侵权请联系管理员
-</code></pre><p>当我们构建AngularJS应用时，通过浏览器（如Chrome，Firefox和IE）的JavaScript控制台访问应用中隐藏的数据和服务总会有些困难。下面是一些简单的技巧可以帮助我们通过Javascript控制台来查看或者控制正在运行的Angular应用，使得应用可以比较容易进行测试，修改，甚至实时的修改我们的Angular应用：</p>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014-08/通过终端调试-AngularJS-应用/#more" class="more-link">阅读全文 &gt;</a>
           </div>
         
         

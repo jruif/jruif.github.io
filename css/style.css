@@ -928,7 +928,7 @@ pre .deletion {
   -ms-interpolation-mode: bicubic;
   image-rendering: optimizeQuality;
 }
-max-width none,
+max-width none !important,
 .vegas-overlay,
 .vegas-background {
   -webkit-user-select: none;
