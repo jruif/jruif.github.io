@@ -1,0 +1,232 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【设计模式】观察者模式JavaScript的实现 | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【设计模式】观察者模式JavaScript的实现"/>
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><div class="header-myinfo alignleft clearfix">
+    <a href="/" class="alignleft">
+        <img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
+    </a>
+    <div class="header-myinfo-con">
+        <h1 class="header-title">Jruif&#39;s Blog</h1>
+         
+            <span class="header-subtitle">
+                路漫漫其修远兮，吾将上下而求索
+            </span>
+        
+    </div>
+</div>
+<nav id="main-nav" class="clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+      <li><a href="/resume">About</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-10-10T05:32:57.000Z"><a href="/2015-10/设计模式-发布订阅者模式JavaScript的实现/">2015-10-10</a></time>
+      
+      
+  
+    <h1 class="title">【设计模式】观察者模式JavaScript的实现</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>写在开始的话：没有最好的设计模式，只有最合适的设计模式，学会它，并忘记它的存在。</p>
+</blockquote>
+<h3 id="观测者模式的定义">观测者模式的定义</h3><p>观察者模式是软甲工程中一种设计模式，也叫订阅发布者模式。在此模式中，一个目标对象管理所有相依于它的观察者对象，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。</p>
+<p>是不是很咬文嚼字，其实可以用生活中很多示例来说明这种模式，例如订阅报纸，报社需要做的是<code>收集（subscribe）</code>需要订阅<code>某种杂志（topic）</code>的用户，并保留他们的<code>通信地址（callback）</code>，每当这种杂志<code>发布（publish）</code>的时候，报社需要做的是给他的用户<code>送去杂志（调用callback）</code>。而作为用户不需要去知道这个杂志什么时候发布。<br><a id="more"></a><br>其实JavaScript中的事件系统也是这种模式，我们并不知道这个事件什么时候会发生，我们只需要做的是监听（subscribe）事件（topic）绑定回调函数（callback）。</p>
+<p>由此可见观察者模式应该包含一下行为：</p>
+<ul>
+<li>订阅（添附） subscribe</li>
+<li>取消订阅（解附） unsubscribe</li>
+<li>发布（通知） publish</li>
+</ul>
+<h3 id="观察者模式的用途">观察者模式的用途</h3><p>在维基百科上对于观察者模式的用途有以下描述：</p>
+<ul>
+<li>当抽象个体有两个互相依赖的层面时。封装这些层面在单独的对象内将可允许程序员单独地去变更与重复使用这些对象，而不会产生两者之间交互的问题。</li>
+<li>当其中一个对象的变更会影响其他对象，却又不知道多少对象必须被同时变更时。</li>
+<li>当对象应该有能力通知其他对象，又不应该知道其他对象的实做细节时。</li>
+</ul>
+<p>可以总结为：</p>
+<ul>
+<li>一对多的关系</li>
+<li>一个改变其他也会变更</li>
+<li>帮助解耦，便于对象间通信</li>
+</ul>
+<h3 id="观察者模式的实现">观察者模式的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subPub</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.cache = &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line">subPub.prototype = &#123;</span><br><span class="line">    subscribe: <span class="function"><span class="keyword">function</span>(<span class="params">topic, callback</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> cache = <span class="keyword">this</span>.cache;</span><br><span class="line">        <span class="keyword">if</span> (!cache[topic]) &#123;</span><br><span class="line">            cache[topic] = [];</span><br><span class="line">        &#125;  </span><br><span class="line">        cache[topic].push(callback);</span><br><span class="line">        <span class="keyword">return</span> [topic, cache[topic]];</span><br><span class="line">    &#125;,</span><br><span class="line">    publish: <span class="function"><span class="keyword">function</span>(<span class="params">topic, args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> cache = <span class="keyword">this</span>.cache;</span><br><span class="line">        <span class="keyword">if</span> (toString.call(args) !== <span class="string">'[object Array]'</span>) &#123;</span><br><span class="line">            args = [].slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        cache[topic] &amp;&amp; cache[topic].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">elm, i, arr</span>) </span>&#123;</span><br><span class="line">            elm.apply(<span class="literal">null</span>, args || []);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    unsubscribe: <span class="function"><span class="keyword">function</span>(<span class="params">topic, handle</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> cache = <span class="keyword">this</span>.cache;</span><br><span class="line">        <span class="keyword">if</span> (toString.call(handle) !== <span class="string">'[object Array]'</span>) &#123;</span><br><span class="line">            handle = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        cache[topic] = cache[topic] &amp;&amp; cache[topic].filter(<span class="function"><span class="keyword">function</span>(<span class="params">elm, index, arr</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; handle.length; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(elm == handle[i])&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试用例">测试用例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sp = <span class="keyword">new</span> subPub;</span><br><span class="line"><span class="keyword">var</span> h1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'start'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> h2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> h3 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br><span class="line">&#125;</span><br><span class="line">sp.subscribe(<span class="string">'/test/1'</span>,h1)</span><br><span class="line">sp.subscribe(<span class="string">'/test/1'</span>,h2)</span><br><span class="line">sp.publish(<span class="string">'/test/1'</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">6</span>,<span class="number">5</span>)</span><br><span class="line"><span class="comment">//==&gt;</span></span><br><span class="line"><span class="comment">//start </span></span><br><span class="line"><span class="comment">//[8, 9, 6, 5]</span></span><br><span class="line">sp.subscribe(<span class="string">'/test/1'</span>,h3)</span><br><span class="line">sp.publish(<span class="string">'/test/1'</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">6</span>,<span class="number">5</span>)</span><br><span class="line"><span class="comment">//start</span></span><br><span class="line"><span class="comment">//[8, 9, 6, 5]</span></span><br><span class="line"><span class="comment">//end</span></span><br><span class="line">sp.unsubscribe(<span class="string">'/test/1'</span>,h1)</span><br><span class="line">sp.publish(<span class="string">'/test/1'</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">6</span>,<span class="number">5</span>)</span><br><span class="line"><span class="comment">//[8, 9, 6, 5]</span></span><br><span class="line"><span class="comment">//end</span></span><br><span class="line">sp.unsubscribe(<span class="string">'/test/1'</span>,h2,h3)</span><br><span class="line">sp.publish(<span class="string">'/test/1'</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">6</span>,<span class="number">5</span>)</span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+<p>本文为作者Jruif原创，如有错误请指正，如转载请注明出处，谢谢。</p>
+<p>相关链接：<br><a href="https://zh.wikipedia.org/wiki/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F" target="_blank" rel="external">维基百科：观察者模式</a><br><a href="http://shichuan.github.io/javascript-patterns/" target="_blank" rel="external">JavaScript Patterns Collection</a></p>
+<blockquote>
+<p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript-Patterns/">JavaScript Patterns</a>, <a href="/tags/观察者模式/">观察者模式</a>, <a href="/tags/设计模式/">设计模式</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Jruif"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->    
+</section>
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/2015-05/【Angular系列】ui-router-多层state与多层view的解构/" class="next" title="【Angular系列】ui-router 多层state与多层view的解构"><span id="next">下一页</span></a>
+  
+  <div class="clearfix"></div>
+</nav>
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2015 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadeTime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
+			}
+			return bg;
+	  	})(5,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 60000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+</script>
+
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
+
+</body>
+</html>
+
