@@ -1,0 +1,145 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>异步 | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><div class="header-myinfo alignleft clearfix">
+    <a href="/" class="alignleft">
+        <img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
+    </a>
+    <div class="header-myinfo-con">
+        <h1 class="header-title">Jruif&#39;s Blog</h1>
+         
+            <span class="header-subtitle">
+                路漫漫其修远兮，吾将上下而求索
+            </span>
+        
+    </div>
+</div>
+<nav id="main-nav" class="clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+      <li><a href="/resume">About</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+<h2 class="archive-title tag">异步</h2>
+
+
+  <div class="archive">
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2016-01-12T03:22:50.000Z"><a href="/2016-01/Redux-on-React使用总结/">2016-01-12</a></time>
+            
+              <h1 class="title"><a href="/2016-01/Redux-on-React使用总结/">Redux on React 使用总结</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
+  </div>
+
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2016 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadeTime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
+			}
+			return bg;
+	  	})(5,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 60000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+</script>
+
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
+
+</body>
+</html>
+

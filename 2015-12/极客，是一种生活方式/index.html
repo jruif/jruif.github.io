@@ -1,0 +1,219 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>极客，是一种生活方式 | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="极客，是一种生活方式"/>
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><div class="header-myinfo alignleft clearfix">
+    <a href="/" class="alignleft">
+        <img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
+    </a>
+    <div class="header-myinfo-con">
+        <h1 class="header-title">Jruif&#39;s Blog</h1>
+         
+            <span class="header-subtitle">
+                路漫漫其修远兮，吾将上下而求索
+            </span>
+        
+    </div>
+</div>
+<nav id="main-nav" class="clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+      <li><a href="/resume">About</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-12-08T17:31:56.000Z"><a href="/2015-12/极客，是一种生活方式/">2015-12-09</a></time>
+      
+      
+  
+    <h1 class="title">极客，是一种生活方式</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>本文用来收集本人的一些曾经为我带来方便的小代码/命令</p>
+</blockquote>
+<a id="more"></a>
+<p>1 合并＊.tdl（腾讯视频的缓存文件）为mp4文件，并复制到“D:\mp4File\”目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /D %i <span class="keyword">in</span> (*) <span class="keyword">do</span> <span class="built_in">cd</span> %i &amp;&amp; copy /b *.tdl <span class="variable">$i</span>.mp4 &amp;&amp; copy *.mp4 <span class="string">"D:\\mp4File\\"</span> &amp;&amp; <span class="built_in">cd</span> .. || <span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<p>上述代码运行环境为windows，讲解：<br>遍历所在目录文件夹，打开每个文件夹，并合并＊.tdl为“目录名.mp4”的mp4文件，并拷贝至D盘下的mp4File文件夹下，不论是否完成以上操作均返回上一目录。<br>我用过一次，后来再没有碰过，不过当时感觉真的很不错，就随手写下来了，我感激还是可以优化的，比如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy /b *.tdl <span class="variable">$i</span>.mp4 &amp;&amp; copy *.mp4 <span class="string">"D:\\mp4File\\"</span></span><br></pre></td></tr></table></figure>
+<p>应该可以合并为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy /b *.tdl D:/mp4File/<span class="variable">$i</span>.mp4</span><br></pre></td></tr></table></figure></p>
+<p>有需要的可以去尝试下。</p>
+<p>2 上传文件到远处服务器 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P <span class="number">16322</span> dist/* jruif@*.*.*.*:/home/jruif/<span class="built_in">test</span>/</span><br></pre></td></tr></table></figure>
+<p>测试过的环境为mac，讲解：<br>安全（使用ssh）复制当前目录下dist文件夹下的所有文件（-r 为递归），到IP地址为<code>*.*.*.*</code>，端口（－P）为<code>16322</code>的,用户名为jruif的主机下的<code>/home/jruif/test/</code>目录中。</p>
+<p>3 微信网页版注入，实现自动发送消息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box=angular.element(<span class="string">".box_ft"</span>).scope()</span><br><span class="line"><span class="keyword">var</span> ea=angular.element(<span class="string">"#editArea"</span>)</span><br><span class="line"><span class="keyword">var</span> handle=setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	box.insertToEditArea(<span class="string">'1'</span>);</span><br><span class="line">	box.sendTextMessage();</span><br><span class="line">	ea.html(<span class="string">''</span>);</span><br><span class="line">&#125;,<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>4 正则提取磁力链接</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg1 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(thunder://QUFtYWduZXQ6P3h0PXVybjpidGlo[\w\+/]+=&#123;0,2&#125;)|((ed2k|qvod)://.*\||magnet:\?xt=urn:btih:([a-fA-F\d]&#123;40&#125;))|([A-Z]&#123;2,5&#125;-\d&#123;3&#125;)'</span>);</span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(magnet:\?xt=urn:btih:([a-fA-F\d]&#123;40&#125;)\&amp;dn\=.+)'</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Jruif"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->    
+</section>
+
+
+
+<nav id="pagination">
+  
+    <a href="/2016-01/Redux-on-React使用总结/" class="prev" title="Redux on React 使用总结"><span id="prev">上一页</span></a>
+  
+  
+    <a href="/2015-10/设计模式-发布订阅者模式JavaScript的实现/" class="next" title="【设计模式】观察者模式JavaScript的实现"><span id="next">下一页</span></a>
+  
+  <div class="clearfix"></div>
+</nav>
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2016 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadeTime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
+			}
+			return bg;
+	  	})(5,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 60000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+</script>
+
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
+
+</body>
+</html>
+
