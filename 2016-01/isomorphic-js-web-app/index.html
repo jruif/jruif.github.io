@@ -1,0 +1,221 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>同构Javascript应用实践 | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="同构Javascript应用实践"/>
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><div class="header-myinfo alignleft clearfix">
+    <a href="/" class="alignleft">
+        <img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
+    </a>
+    <div class="header-myinfo-con">
+        <h1 class="header-title">Jruif&#39;s Blog</h1>
+         
+            <span class="header-subtitle">
+                路漫漫其修远兮，吾将上下而求索
+            </span>
+        
+    </div>
+</div>
+<nav id="main-nav" class="clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">分类</a></li>
+    
+      <li><a href="/resume">About</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-27T03:32:22.000Z"><a href="/2016-01/isomorphic-js-web-app/">2016-01-27</a></time>
+      
+      
+  
+    <h1 class="title">同构Javascript应用实践</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在上个项目中使用了垂涎已久的redux ＋ react，说实在话，现在还陶醉在这种开发模式中，严格的单向数据流，近乎强制的分层方式，让我在前期废了好多脑细胞，不过，当他的好处凸显的时候完全是指数级的上升，而且这种方式特别适合多人合作，后期维护的难度也是很低，这也是我做前端项目以来感受最深的地方，不过作为SPA，它也存在一个巨大的缺陷：必须客户端渲染。这就导致客户在第一次进入页面的时候变的非常慢，为了合理有效的解决这个问题，我也尝试了一把服务器使用相同的代码来渲染页面。</p>
+<p>其实服务器渲染页面是一件很简单的事，但是为了提高代码的重用，我决定使用同构的方式来实现，何为同构？就是一套相同的代码既能在客户端使用，也能在服务器端使用，这在以前是一件很蛋疼的事，应为我们既然做了前后端分离，现在又要做服务器端渲染，这不是在坑后端吗。。。不过同构就不同了，我们把我们的前端渲染代码也放在服务器端使用，这样既完成了前后端分离，也解决了制约SPA的两大痛点：SEO的困难以及首次进入的缓慢。<br><a id="more"></a></p>
+<blockquote>
+<p>注：本文是建立在上一篇博客的基础上的，还没有用过或没有了解过Redux on React的同学，可以先看我上一篇博客。</p>
+</blockquote>
+<p>既然我们要在服务器使用客户端的代码渲染页面，那我们应该先考虑如何提供与客户端一致的基础环境（这里使用的是express搭建的服务器），所以我们需要引入react／redux等包，如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./server.js</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>既然是要在服务器端解析react，那我们还需要引入下面这个包：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./server.js</span></span><br><span class="line"><span class="keyword">import</span> ReactDOMServer <span class="keyword">from</span> <span class="string">'react-dom/server'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>在此，我们的基础环境就有了，现在我们需要引入我们的业务代码了,但是我们到底需要引入那些必要的包呢，在上一篇文章中我介绍了redux是如何用在react中的，在<code>./index.js</code>中，我们使用下面的代码来初始化应用，如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./index.js</span></span><br><span class="line"><span class="keyword">const</span> store = configureStore(initialState);</span><br><span class="line">render(</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="title">Provider</span> <span class="attribute">store</span>=<span class="value">&#123;store&#125;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">App</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">Provider</span>&gt;</span>,</span><br><span class="line">    document.getElementById('root')</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure></p>
+<p>而且我们也知道，在redux on react应用中，store是一个关键的枢纽，可以完全比喻为中央控制系统，应用的state也是存储在store中，在redux on react应用中，state是渲染页面的基础，所以我们现在要做的第一步就是创建state，以及把Provide填充进<code>./index.html</code>的<code>root</code>元素中。创建代码如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./server.js</span></span><br><span class="line"><span class="comment">// 创建redux实例</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(counterApp, &#123;counter: <span class="number">10</span>&#125;);</span><br><span class="line"><span class="comment">// 使用react渲染组件</span></span><br><span class="line"><span class="keyword">const</span> html = ReactDOMServer.renderToString(<span class="xml"><span class="tag">&lt;<span class="title">Provider</span> <span class="attribute">store</span>=<span class="value">&#123;store&#125;</span>&gt;</span><span class="tag">&lt;<span class="title">App</span> /&gt;</span><span class="tag">&lt;/<span class="title">Provider</span>&gt;</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>在上例子中，我们给state一个初始值<code>counter: 10</code>，并使用了renderToString来进行解析jsx模版，现在我们要考虑的是什么时候使用使用，我们都知道在express中，客户端请求服务器的时候，我们通过下面的例子来处理请求：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./server.js</span></span><br><span class="line"> app.get(<span class="string">"/"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   res.sendFile(__dirname + <span class="string">'/index.html'</span>)</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>那么同样的我们可以改造下返回的函数就能完成我们渲染成的字符串：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./server.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleRender</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建redux实例</span></span><br><span class="line">    <span class="keyword">const</span> store = createStore(counterApp, &#123;counter: <span class="number">10</span>&#125;);</span><br><span class="line">    <span class="comment">// 使用react渲染组件</span></span><br><span class="line">    <span class="keyword">const</span> html = ReactDOMServer.renderToString(<span class="xml"><span class="tag">&lt;<span class="title">Provider</span> <span class="attribute">store</span>=<span class="value">&#123;store&#125;</span>&gt;</span><span class="tag">&lt;<span class="title">App</span> /&gt;</span><span class="tag">&lt;/<span class="title">Provider</span>&gt;</span>)</span>;</span><br><span class="line">    rs.send(renderFullPage(html));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderFullPage</span>(<span class="params">html</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`</span><br><span class="line">        &lt;!DOCTYPE html&gt;</span><br><span class="line">        &lt;html&gt;</span><br><span class="line">          &lt;head&gt;</span><br><span class="line">            &lt;title&gt;Redux counter example－1-1-2&lt;/title&gt;</span><br><span class="line">          &lt;/head&gt;</span><br><span class="line">          &lt;body&gt;</span><br><span class="line">            &lt;div id="root"&gt;</span><br><span class="line">                <span class="subst">$&#123;html&#125;</span></span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;script src="/static/bundle.js"&gt;&lt;/script&gt;</span><br><span class="line">          &lt;/body&gt;</span><br><span class="line">        &lt;/html&gt;</span><br><span class="line">    `</span>;</span><br><span class="line">&#125;</span><br><span class="line">app.get(<span class="string">"/"</span>, handleRender);</span><br></pre></td></tr></table></figure></p>
+<p>那么现在，当用户再去请求根节点的时候我们就返回的是我们渲染好的页面，但是现在还有个问题，当页面在客户端初始化的时候，客户端的js也会根据初始状态来更新页面，而我们上面设置的初始值就完全没有什么作用了，所以我们应该吧初始值也传给客户端，不仅仅渲染进页面中。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./server.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleRender</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建redux实例</span></span><br><span class="line">    <span class="keyword">const</span> store = createStore(counterApp, &#123;counter: <span class="number">10</span>&#125;);</span><br><span class="line">    <span class="comment">// 使用react渲染组件</span></span><br><span class="line">    <span class="keyword">const</span> html = ReactDOMServer.renderToString(<span class="xml"><span class="tag">&lt;<span class="title">Provider</span> <span class="attribute">store</span>=<span class="value">&#123;store&#125;</span>&gt;</span><span class="tag">&lt;<span class="title">App</span> /&gt;</span><span class="tag">&lt;/<span class="title">Provider</span>&gt;</span>)</span>;</span><br><span class="line">    <span class="comment">// 从 store 中获得初始 state</span></span><br><span class="line">    <span class="keyword">const</span> initialState = store.getState();</span><br><span class="line">    rs.send(renderFullPage(html,initialState));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderFullPage</span>(<span class="params">html</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`</span><br><span class="line">        &lt;!DOCTYPE html&gt;</span><br><span class="line">        &lt;html&gt;</span><br><span class="line">          &lt;head&gt;</span><br><span class="line">            &lt;title&gt;Redux counter example－1-1-2&lt;/title&gt;</span><br><span class="line">          &lt;/head&gt;</span><br><span class="line">          &lt;body&gt;</span><br><span class="line">            &lt;div id="root"&gt;</span><br><span class="line">                <span class="subst">$&#123;html&#125;</span></span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;script type="text/javascript"&gt;</span><br><span class="line">                window._initialState_ = <span class="subst">$&#123;JSON.stringify(initialState)&#125;</span>;</span><br><span class="line">            &lt;/script&gt;</span><br><span class="line">            &lt;script src="/static/bundle.js"&gt;&lt;/script&gt;</span><br><span class="line">          &lt;/body&gt;</span><br><span class="line">        &lt;/html&gt;</span><br><span class="line">    `</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在<code>./index.js</code>我们也要做相应的处理<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./index.js</span></span><br><span class="line"><span class="keyword">const</span> initialState = <span class="built_in">window</span>._initialState_;</span><br><span class="line"><span class="keyword">const</span> store = configureStore(initialState);</span><br></pre></td></tr></table></figure></p>
+<p>至此，我们基本完成了SPA页面在服务器端端端渲染，但是我不喜欢把模版直接写在代码中，由于fs.readFile是异步的，而且也不推荐使用同步读文件，所以我使用了promise对上面的<code>renderFullPage</code>做了处理。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./server.js</span></span><br><span class="line"><span class="keyword">import</span> Promise <span class="keyword">from</span> <span class="string">'promise'</span></span><br><span class="line">var read = Promise.denodeify(fs.readFile);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleRender</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建redux实例</span></span><br><span class="line">    <span class="keyword">const</span> store = createStore(counterApp, &#123;counter: <span class="number">10</span>&#125;);</span><br><span class="line">    <span class="comment">// 使用react渲染组件</span></span><br><span class="line">    <span class="keyword">const</span> html = ReactDOMServer.renderToString(<span class="xml"><span class="tag">&lt;<span class="title">Provider</span> <span class="attribute">store</span>=<span class="value">&#123;store&#125;</span>&gt;</span><span class="tag">&lt;<span class="title">App</span> /&gt;</span><span class="tag">&lt;/<span class="title">Provider</span>&gt;</span>)</span>;</span><br><span class="line">    <span class="comment">// 从 store 中获得初始 state</span></span><br><span class="line">    <span class="keyword">const</span> initialState = store.getState();</span><br><span class="line">    renderFullPage(html, initialState).then( html =&gt;&#123;</span><br><span class="line">        res.send(html);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderFullPage</span>(<span class="params">html, initialState</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> read(__dirname + <span class="string">'/index.html'</span>, <span class="string">'utf8'</span>).then(data =&gt; &#123;</span><br><span class="line">        <span class="comment">// 模版解析</span></span><br><span class="line">        <span class="keyword">return</span> data.replace(<span class="regexp">/(\$\&#123;.+\&#125;)/g</span>, <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">eval</span>(b.replace(<span class="regexp">/[$&#123;&#125;]/g</span>, <span class="string">''</span>));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;).catch(err =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'error:'</span>,err);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于nodejs的5.0版本不支持ES6的<code>import</code>，所以我们还需要babel的一个组件来处理<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./star.js</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'babel/register'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./server'</span>);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/express/">express</a>, <a href="/tags/promise/">promise</a>, <a href="/tags/react/">react</a>, <a href="/tags/redux/">redux</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Jruif"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->    
+</section>
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/2016-01/Redux-on-React使用总结/" class="next" title="Redux on React 使用总结"><span id="next">下一页</span></a>
+  
+  <div class="clearfix"></div>
+</nav>
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2016 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadeTime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
+			}
+			return bg;
+	  	})(5,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 60000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+</script>
+
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
+
+</body>
+</html>
+
