@@ -1,0 +1,268 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>无线web解决方案集锦（支付宝篇） | Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+  <meta name="author" content="jruif">
+  
+  <meta name="description" content="jruif,jruif博客,Javascript,css3,nodejs">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="无线web解决方案集锦（支付宝篇）"/>
+  <meta property="og:site_name" content="Jruif&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Jruif&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/js/jruif.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+  <header id="header" class="inner clearfix"><div class="header-myinfo alignleft clearfix">
+    <a href="/" class="alignleft">
+        <img class="avatar" src="http://ww2.sinaimg.cn/large/7a0338aegw1ej12rnn2lyj2028028t8j.jpg" title="Jruif&#39;s Blog | 路漫漫其修远兮，吾将上下而求索">
+    </a>
+    <div class="header-myinfo-con">
+        <h1 class="header-title">Jruif&#39;s Blog</h1>
+         
+            <span class="header-subtitle">
+                路漫漫其修远兮，吾将上下而求索
+            </span>
+        
+    </div>
+</div>
+<nav id="main-nav" class="clearfix">
+  <ul class="clearfix">
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/resume">About</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  
+    
+
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-03-23T10:06:03.000Z"><a href="/2016-03/无线web解决方案集锦（支付宝篇）/">2016-03-23</a></time>
+      
+      
+  
+    <h1 class="title">无线web解决方案集锦（支付宝篇）</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>本文摘录自<a href="http://am-team.github.io/amg/dev-exp-doc.html" target="_blank" rel="external">支付宝无线开发团队</a></p>
+</blockquote>
+<h2 id="DOM选择器">DOM选择器</h2><p>html5为了我们提供了一个非常好的DOM选择器，就是document.querySelector和document.querySelectorAll这两个方法，这两个方法在android2.1+以及ios3+以后，都可以使用，其接受的参数为css选择器。在实际web开发中，有一部大部分工作会用到DOM的操作，通过这个神器，可以解决大多数的DOM的操作。建议大家使用的时候，可以多多使用这两个方法。<br><a id="more"></a><br>其他的DOM的选择器的兼容性并不是太好，建议不要使用。</p>
+<h2 id="事件">事件</h2><h3 id="手势事件">手势事件</h3><p>touchstart //当手指接触屏幕时触发<br>touchmove //当已经接触屏幕的手指开始移动后触发<br>touchend //当手指离开屏幕时触发<br>touchcancel</p>
+<h3 id="触摸事件">触摸事件</h3><p>gesturestart //当两个手指接触屏幕时触发<br>gesturechange //当两个手指接触屏幕后开始移动时触发<br>gestureend</p>
+<h3 id="屏幕旋转事件">屏幕旋转事件</h3><p>onorientationchange  </p>
+<h3 id="检测触摸屏幕的手指何时改变方向">检测触摸屏幕的手指何时改变方向</h3><p>orientationchange</p>
+<h3 id="touch事件支持的相关属性">touch事件支持的相关属性</h3><p>touches<br>targetTouches<br>changedTouches<br>clientX　　　　// X coordinate of touch relative to the viewport (excludes scroll offset)<br>clientY　　　　// Y coordinate of touch relative to the viewport (excludes scroll offset)<br>screenX　　　 // Relative to the screen<br>screenY 　　 // Relative to the screen<br>pageX　　 　　// Relative to the full page (includes scrolling)<br>pageY　　　　 // Relative to the full page (includes scrolling)<br>target　　　　 // Node the touch event originated from<br>identifier　　 // An identifying number, unique to each touch event<br>屏幕旋转事件：onorientationchange</p>
+<h3 id="判断屏幕是否旋转">判断屏幕是否旋转</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">orientationChange</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(<span class="built_in">window</span>.orientation) &#123;</span><br><span class="line">    　　<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            alert(<span class="string">"肖像模式 0,screen-width: "</span> + screen.width + <span class="string">"; screen-height:"</span> + screen.height);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    　　<span class="keyword">case</span> -<span class="number">90</span>:</span><br><span class="line">            alert(<span class="string">"左旋 -90,screen-width: "</span> + screen.width + <span class="string">"; screen-height:"</span> + screen.height);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    　　<span class="keyword">case</span> <span class="number">90</span>:</span><br><span class="line">            alert(<span class="string">"右旋 90,screen-width: "</span> + screen.width + <span class="string">"; screen-height:"</span> + screen.height);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    　　<span class="keyword">case</span> <span class="number">180</span>:</span><br><span class="line">        　　alert(<span class="string">"风景模式 180,screen-width: "</span> + screen.width + <span class="string">"; screen-height:"</span> + screen.height);</span><br><span class="line">        　　<span class="keyword">break</span>;</span><br><span class="line">    &#125;;&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="添加事件监听">添加事件监听</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    orientationChange();</span><br><span class="line">    <span class="built_in">window</span>.onorientationchange = orientationChange;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="双手指滑动事件：">双手指滑动事件：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 双手指滑动事件</span></span><br><span class="line">addEventListener(<span class="string">'load'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">        <span class="built_in">window</span>.onmousewheel = twoFingerScroll;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="literal">false</span>              <span class="comment">// 兼容各浏览器，表示在冒泡阶段调用事件处理程序 (true 捕获阶段)</span></span><br><span class="line">);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">twoFingerScroll</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> delta =ev.wheelDelta/<span class="number">120</span>; <span class="comment">//对 delta 值进行判断(比如正负) ，而后执行相应操作</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="JS_单击延迟">JS 单击延迟</h3><p>click 事件因为要等待单击确认，会有 300ms 的延迟，体验并不是很好。<br>开发者大多数会使用封装的 tap 事件来代替click 事件，所谓的 tap 事件由 touchstart 事件 + touchmove 判断 + touchend 事件封装组成。<br>在移动浏览器中对触摸事件的响应顺序应当是：<code>ontouchstart -&gt; ontouchmove -&gt; ontouchend -&gt; onclick</code>。<br>使用click会出现绑定点击区域闪一下的情况，解决：给该元素一个样式如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-webkit-tap-highlight-color</span>: <span class="tag">rgba</span>(0,0,0,0);</span><br></pre></td></tr></table></figure></p>
+<p>如果不使用click，也不能简单的用touchstart或touchend替代，需要用touchstart的模拟一个click事件，并且不能发生touchmove事件，或者用zepto中的tap（轻击）事件。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">body</span><span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-overflow-scrolling</span>:<span class="value"> touch</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>用iphone或ipad浏览很长的网页滚动时的滑动效果很不错吧？不过如果是一个div，然后设置 <code>height:200px;overflow:auto;</code>的话，可以滚动但是完全没有那滑动效果，很郁闷吧？</p>
+<p>我看到很多网站为了实现这一效果，用了第三方类库，最常用的是iscroll（包括新浪手机页，百度等） 我一开始也使用，不过自从用了<code>-webkit-overflow-scrolling: touch;</code>样式后，就完全可以抛弃第三方类库了，把它加在body{}区域，所有的overflow需要滚动的都可以生效了。</p>
+<h2 id="利用_Media_Query监听">利用 Media Query监听</h2><p>Media Query 相信大部分人已经使用过了。其实 JavaScript可以配合 Media Query这么用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mql = <span class="built_in">window</span>.matchMedia(<span class="string">"(orientation: portrait)"</span>);</span><br><span class="line">mql.addListener(handleOrientationChange);</span><br><span class="line">handleOrientationChange(mql);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleOrientationChange</span>(<span class="params">mql</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (mql.matches) &#123;</span><br><span class="line">    alert(<span class="string">'The device is currently in portrait orientation '</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">'The device is currently in landscape orientation'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>借助了 Media Query 接口做的事件监听，所以很强大！也可以通过获取 CSS 值来使用 Media Query 判断设备情况，详情请看：<a href="http://yujiangshui.com/use-javascript-css-media-queries-detect-device-state/" target="_blank" rel="external">JavaScript 依据 CSS Media Queries 判断设备的方法</a></p>
+<h2 id="页面描述">页面描述</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon-precomposed"</span> <span class="attribute">href</span>=<span class="value">"http://www.xxx.com/App_icon_114.png"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon-precomposed"</span> <span class="attribute">sizes</span>=<span class="value">"72x72"</span> <span class="attribute">href</span>=<span class="value">"http://www.xxx.com/App_icon_72.png"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon-precomposed"</span> <span class="attribute">sizes</span>=<span class="value">"114x114"</span> <span class="attribute">href</span>=<span class="value">"http://www.xxx.com/App_icon_114.png"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个属性是当用户把连接保存到手机桌面时使用的图标，如果不设置，则会用网页的截图。有了这，就可以让你的网页像APP一样存在手机里了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-startup-image"</span> <span class="attribute">href</span>=<span class="value">"/img/startup.png"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个是APP启动画面图片，用途和上面的类似，如果不设置，启动画面就是白屏，图片像素就是手机全屏的像素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-mobile-web-app-status-bar-style"</span> <span class="attribute">content</span>=<span class="value">"black-translucent"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个描述是表示打开的web app的最上面的时间、信号栏是黑色的，当然也可以设置其它参数，详细参数说明请参照<a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html" target="_blank" rel="external">Safari HTML Reference - Supported Meta Tags</a></p>
+<h2 id="阻止屏幕旋转时字体自动调整">阻止屏幕旋转时字体自动调整</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">html</span>, <span class="tag">body</span>, <span class="tag">form</span>, <span class="tag">fieldset</span>, <span class="tag">p</span>, <span class="tag">div</span>, <span class="tag">h1</span>, <span class="tag">h2</span>, <span class="tag">h3</span>, <span class="tag">h4</span>, <span class="tag">h5</span>, <span class="tag">h6</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-text-size-adjust</span>:<span class="value">none</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="模拟:hover伪类">模拟:hover伪类</h2><p>因为iPhone并没有鼠标指针，所以没有hover事件。那么CSS :hover伪类就没用了。但是iPhone有Touch事件，onTouchStart 类似 onMouseOver，onTouchEnd 类似 onMouseOut。所以我们可以用它来模拟hover。使用Javascript：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myLinks = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; myLinks.length; i++)&#123;</span><br><span class="line">　　 myLinks[i].addEventListener(’touchstart’, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.className = “hover”;</span><br><span class="line">    &#125;, <span class="literal">false</span>);</span><br><span class="line">　　 myLinks[i].addEventListener(’touchend’, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.className = “”;</span><br><span class="line">    &#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后用CSS增加hover效果：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">a</span><span class="pseudo">:hover</span>, <span class="tag">a</span><span class="class">.hover</span> <span class="rules">&#123; <span class="comment">/* 你的hover效果 */</span> &#125;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="居中问题">居中问题</h2><p>居中是移动端跟pc端共同的噩梦。这里有两种兼容性比较好的新方案。</p>
+<ul>
+<li><p>table布局法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.box</span><span class="rules">&#123; </span><br><span class="line">    <span class="rule"><span class="attribute">text-align</span>:<span class="value">center</span></span>; </span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value">table-cell</span></span>; </span><br><span class="line">    <span class="rule"><span class="attribute">vertical-align</span>:<span class="value">middle</span></span>; </span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>老版本flex布局法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.box</span><span class="rules">&#123; </span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value">-webkit-box</span></span>; </span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-box-pack</span>:<span class="value"> center</span></span>; </span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-box-align</span>:<span class="value"> center</span></span>; </span><br><span class="line">    <span class="rule"><span class="attribute">text-align</span>:<span class="value">center</span></span>; </span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以上两种其实分别是retchat跟ionic的布局基石。</p>
+<h2 id="处理_Retina_双倍屏幕">处理 Retina 双倍屏幕</h2><p><a href="http://www.w3cplus.com/css/css-background-size-graphics.html" target="_blank" rel="external">使用CSS3的background-size优化苹果的Retina屏幕的图像显示</a><br><a href="http://miekd.com/articles/using-css-sprites-to-optimize-your-website-for-retina-displays/" target="_blank" rel="external">（经典）Using CSS Sprites to optimize your website for Retina Displays</a><br><a href="http://www.w3cplus.com/css/using-css-sprites-to-optimize-your-website-for-retina-displays.html" target="_blank" rel="external">使用css sprites来优化你的网站在Retina屏幕下显示</a></p>
+<h2 id="input类型为date情况下不支持placeholder">input类型为date情况下不支持placeholder</h2><p>这其实是浏览器自己的处理。因为浏览器会针对此类型 input 增加 datepicker 模块。</p>
+<p>对 input type date 使用 placeholder 的目的是为了让用户更准确的输入日期格式，iOS 上会有 datepicker 不会显示 placeholder 文字，但是为了统一表单外观，往往需要显示。Android 部分机型没有 datepicker 也不会显示 placeholder 文字。</p>
+<p>桌面端（Mac）</p>
+<ul>
+<li>Safari 不支持 datepicker，placeholder 正常显示。</li>
+<li>Firefox 不支持 datepicker，placeholder 正常显示。</li>
+<li>Chrome 支持 datepicker，显示 年、月、日 格式，忽略 placeholder。<br>移动端</li>
+<li>iPhone5 iOS7 有 datepicker 功能，但是不显示 placeholder。</li>
+<li>Andorid 4.0.4 无 datepicker 功能，不显示 placeholder</li>
+</ul>
+<p>解决方法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">placeholder</span>=<span class="value">"Date"</span> <span class="attribute">class</span>=<span class="value">"textbox-n"</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">onfocus</span>=<span class="value">"(this.type='date')"</span>  <span class="attribute">id</span>=<span class="value">"date"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>因为text是支持placeholder的。因此当用户focus的时候自动把type类型改变为date，这样既有placeholder也有datepicker了。</p>
+<h2 id="引导用户安装并打开app">引导用户安装并打开app</h2><p>通过iframe src发送请求打开app自定义url scheme，如taobao://home（淘宝首页） 、etao://scan（一淘扫描）); 如果安装了客户端则会直接唤起，直接唤起后，之前浏览器窗口（或者扫码工具的webview）推入后台； 如果在指定的时间内客户端没有被唤起，则js重定向到app下载地址。 大概实现代码如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">goToNative:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!body) &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            doc.body.appendChild(iframe);</span><br><span class="line">        &#125;, <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        body.appendChild(iframe);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        doc.body.removeChild(iframe);</span><br><span class="line">        <span class="comment">//去下载，下载链接一般是itunes app store或者apk文件链接</span></span><br><span class="line">        gotoDownload(startTime);</span><br><span class="line">        <span class="comment">/**</span><br><span class="line">         + 测试时间设置小于800ms时，在android下的UC浏览器会打开native app时并下载apk，</span><br><span class="line">         + 测试android+UC下打开native的时间最好大于800ms;</span><br><span class="line">         */</span></span><br><span class="line">    &#125;, <span class="number">800</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="消除transition闪屏">消除transition闪屏</h2><p>两个方法：使用css3动画的时尽量利用3D加速，从而使得动画变得流畅。动画过程中的动画闪白可以通过 backface-visibility 隐藏。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-webkit-transform-style</span>: <span class="tag">preserve-3d</span>;</span><br><span class="line"><span class="comment">/*设置内嵌的元素在 3D 空间如何呈现：保留 3D*/</span></span><br><span class="line"><span class="tag">-webkit-backface-visibility</span>: <span class="tag">hidden</span>;</span><br><span class="line"><span class="comment">/*（设置进行转换的元素的背面在面对用户时是否可见：隐藏）*/</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="iOS_6_跟_iPhone_5">iOS 6 跟 iPhone 5</h2><h3 id="IP5_的媒体查询:">IP5 的媒体查询:</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">media</span> (device-height: <span class="number">568px</span>) and (-webkit-min-device-pixel-ratio: <span class="number">2</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* iPhone 5 or iPod Touch 5th generation */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="媒体查询，响应不同启动图片">媒体查询，响应不同启动图片</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href="startup-568h.png" rel="apple-touch-startup-image" media="(device-height: 568px)"&gt;</span><br><span class="line">&lt;link href="startup.png" rel="apple-touch-startup-image" sizes="640x920" media="(device-height: 480px)"&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="拍照上传:">拍照上传:</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">file</span> <span class="attribute">accept</span>=<span class="value">"video/*"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">file</span> <span class="attribute">accept</span>=<span class="value">"image/*"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>不支持其他类型的文件 ，如音频，Pages文档或PDF文件。 也没有getUserMedia摄像头的实时流媒体支持。</p>
+<h3 id="智能应用程序横幅">智能应用程序横幅</h3><p>有了智能应用程序横幅，当网站上有一个相关联的本机应用程序时，Safari浏览器可以显示一个横幅。 如果用户没有安装这个应用程序将显示“安装”按钮，或已经安装的显示“查看”按钮可打开它。<br>在 iTunes Link Maker 搜索我们的应用程序和应用程序ID。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-itunes-app"</span> <span class="attribute">content</span>=<span class="value">"app-id=9999999"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以使用 app-argument 提供字符串值，如果参加iTunes联盟计划，可以添加元标记数据<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-itunes-app"</span> <span class="attribute">content</span>=<span class="value">"app-id=9999999, app-argument=xxxxxx"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-itunes-app"</span> <span class="attribute">content</span>=<span class="value">"app-id=9999999, app-argument=xxxxxx, affiliate-data=partnerId=99&amp;siteID=XXXX"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>横幅需要156像素（设备是312 hi-dpi）在顶部，直到用户在下方点击内容或关闭按钮，你的网站才会展现全部的高度。 它就像HTML的DOM对象，但它不是一个真正的DOM。</p>
+<h2 id="iOS_safari_BUG_总结">iOS safari BUG 总结</h2><p>safari对DOM中元素的冒泡机制有个奇葩的BUG，仅限iOS版才会触发</p>
+<p>BUG重现用例请见线上DEMO: <a href="http://jsfiddle.net/e75od2bb/34/" target="_blank" rel="external">地址</a></p>
+<h3 id="bug表现与规避">bug表现与规避</h3><p>在进行事件委托时，如果将未存在于DOM的元素事件直接委托到body上的话,会导致事件委托失效，调试结果为事件响应到body子元素为止，既没有冒泡到body上，也没有被body所捕获。但如果事件是DOM元素本身具有的，则不会触发bug。换而言之，只有元素的非标准事件（比如click事件之于div）才会触发此bug。<br>因为bug是由safari的事件解析机制导致，无法修复，但是有多种手段可以规避<br>如何避免bug触发：不要委托到body结点上，委托到任意指定父元素都可以，或者使用原生具有该事件的元素，如使用click事件触发就用a标签包一层。<br>已触发如何修补：safari对事件的解析非常特殊，如果一个事件曾经被响应过，则会一直冒泡（捕获）到根结点，所以对于已大规模触发的情况，只需要在body元素的所有子元素绑定一个空事件就好了，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="string">"body &gt; *"</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;);</span><br></pre></td></tr></table></figure></p>
+<p>可能会对性能有一定影响，但是使用方便，大家权衡考虑吧~~~</p>
+<blockquote>
+<p>欢迎加入<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">Javascript前端技术</a>共同讨论，群号为:<a href="http://shang.qq.com/wpa/qunwpa?idkey=a61d2af0241e8eb322e98f4a162e124606acf0b96ec06683fb67ddeb538ce0a4" target="_blank" rel="external">85088298</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/Media-Query/">Media Query</a>, <a href="/tags/click延迟/">click延迟</a>, <a href="/tags/touch事件/">touch事件</a>, <a href="/tags/居中/">居中</a>, <a href="/tags/旋转判断/">旋转判断</a>, <a href="/tags/无线web开发/">无线web开发</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Jruif"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->    
+</section>
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/2016-01/isomorphic-js-web-app/" class="next" title="同构Javascript应用实践"><span id="next">下一页</span></a>
+  
+  <div class="clearfix"></div>
+</nav>
+    
+    </div></div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <footer id="footer" class="inner"><div class="">
+  
+  &copy; 2016 jruif
+  
+ Powered by <a href='http://hexo.io'>Hexo</a>
+</div>
+<div class="clearfix"></div></footer>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.jruif.js"></script>
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
+<script type="text/javascript">
+(function($){
+	var elem = document.createElement('canvas');
+	if(!(elem.getContext && elem.getContext('2d'))){
+		alert("您的浏览器不支持HTML5，页面会错乱。请选择Chrome，Firefox，IE9+以获得更好的浏览体验。");
+	}
+	$("h1").jruif({
+		rollingLinks: true
+	});
+	//请求bing印象图片
+	var backg=(function(num,fadeTime){
+	  		var bg=[];
+	  		for(var i=0;i<num;i++){
+	  			bg.push({
+	  				"src":"http://toolsapp.sinaapp.com/bingwp.php?idx="+Math.floor(Math.random() * 15),
+	  				"fade":fadeTime
+	  			});
+			}
+			return bg;
+	  	})(5,5000);
+	//vegar插件
+	$.vegas('slideshow',{
+	  	delay: 60000,//多久换一幅图片
+		backgrounds: backg
+	})( 'overlay', {
+		src:'/vegas/overlay.png',
+		opacity:0.6
+	});
+	$('.fancybox').fancybox();
+	$("#pagination a").on("click", function(){
+		$(this).addClass("loading");
+	});
+})(jQuery);
+</script>
+
+	
+		<script type="text/javascript">
+			(function(){
+				var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F61148521014dfb85ac8907c77456806a' type='text/javascript'%3E%3C/script%3E"));
+			})();
+		</script>
+	
+
+</body>
+</html>
+
